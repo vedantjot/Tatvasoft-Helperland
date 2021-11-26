@@ -339,6 +339,7 @@ color: white;
 
 .contact-row{
     margin-top: 3%;
+    margin-bottom: 2%;
 }
 
 .contact-col-top{
@@ -355,6 +356,20 @@ color: white;
     text-align: center;
 
 }
+.contact-text{
+    font-family: 'Roboto', sans-serif;
+    
+    font-size: 17.99px;
+    font-weight: bold;
+
+
+}
+.contact-email-col{
+    text-align: right;
+}
+.contact-submit-col{
+    text-align: left;
+}
 
 
 .contact-col-top-image{
@@ -368,6 +383,93 @@ color: white;
 
 }
 
+.contact-email-textbox{
+    background: #F4F5F8 0% 0% no-repeat padding-box;
+border: 1px solid #565656;
+border-radius: 20px;
+
+
+}
+.contact-submit-button{
+    background: #FF7B6D 0% 0% no-repeat padding-box;
+border-radius: 20px;
+opacity: 1;
+color: white;
+border-color:  #FF7B6D;
+}
 
 
 
+
+/*footer*/
+
+.footer-container{
+    background-color: black;
+}
+.footer-logo-col{
+    text-align: center;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.footer-nav-col{
+    text-align: center;
+    margin-top: 3%;
+    
+}
+.footer-nav-link {
+    color: white;
+    font-size: 13.99;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+    margin-right: 2%;
+
+}
+.footer-social-col{
+    text-align: center;
+    margin-top: 3%;
+}
+.footer-social-image{
+    margin-right: 2%;
+
+}
+
+
+
+.footer-logo-image{
+    max-height: 92px;
+}
+
+/*privacy*/
+
+.privacy-row{
+    background: #292929;
+    
+    padding: 0.5%;
+    
+
+}
+
+.privacy-text-col{
+    text-align: right;
+    margin-top: 0.5%;
+    
+}
+
+.privacy-text{
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+.privacy-button-col{
+
+   
+
+}
+.privacy-button{
+    background: #EED507 0% 0% no-repeat padding-box;
+border-radius: 20px;
+opacity: 1;
+height: 40px;
+width: 99px;
+}
