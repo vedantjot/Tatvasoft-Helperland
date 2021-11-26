@@ -198,8 +198,7 @@ color: white;
 
 
 .photo-row{
-    margin-left: 10%;
-    margin-right: 10%;
+   
     margin-bottom: 50px;
 }
 
@@ -229,8 +228,7 @@ color: white;
     font-weight: bolder;
 }
 .blog-row{
-    margin-left: 10%;
-    margin-right: 10%;
+  
 
 }
 .blog-card{
@@ -339,7 +337,7 @@ color: white;
 
 .contact-row{
     margin-top: 3%;
-    margin-bottom: 2%;
+    padding-bottom: 2%;
 }
 
 .contact-col-top{
@@ -461,11 +459,7 @@ border-color:  #FF7B6D;
     color: white;
 }
 
-.privacy-button-col{
 
-   
-
-}
 .privacy-button{
     background: #EED507 0% 0% no-repeat padding-box;
 border-radius: 20px;
