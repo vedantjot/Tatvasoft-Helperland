@@ -6,6 +6,12 @@
       margin: 0px;
       padding: 0px;
       overflow-x: hidden; 
+
+      color: #646464;
+      font-size: 16px; 
+      font-family: 'Roboto', sans-serif;
+      font-weight: bold;
+      
   
      
   }
@@ -667,6 +673,7 @@ height: 54px;
     font-size: 35px;
     font-family: 'Roboto', sans-serif;
     margin-top: 15px;
+    font-weight: bold;
 
 }
 .price-content-seprator{
@@ -733,6 +740,7 @@ height: 54px;
 
 .price-include-container{
     background-color: #F6F6F6;
+    text-align: center;
 }
 
 .price-include-row{
@@ -759,6 +767,75 @@ height: 54px;
      
 
 }
+
+
+/*why section*/
+
+.price-why-container{
+    
+    text-align: center;
+    
+    max-width: 1045px;
+    
+    
+}
+
+
+/*Contact us*/
+
+.contact-contactus-container{
+
+    text-align: center;
+
+
+}
+.contact-contactus-card-container{
+    margin-left: 15%;
+    margin-right: 15%;
+
+}
+
+.contact-contactus-card{
+    margin-left: 5%;
+    margin-right: 5%;
+
+}
+
+.contact-hr{
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+
+
+/*form section*/
+
+.contact-form-container{
+
+    text-align: center;
+    max-width: 612px;
+    
+
+}
+.contact-form-title{
+    text-align: center;
+
+    color: #4F4F4F;
+    font-size: 28px; 
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    
+
+}
+
+
+/*map*/
+
+.contact-map-container{
+    
+}
+
 
 
 
