@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!--Custome Css-->
+    <link rel="stylesheet" href="style.css">
+
+    <!--fonts-->
+
+
+
+    <title>Service Provider>Become-a-pro</title>
+</head>
+
+<body>
+
+
+
+
+
+
+    <nav class="navbar faq-navbar navbar-expand-md navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand faq-navbar-brand" href="#">
+                <img src="image/logo-small.png" alt="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav faq-navbar-nav ms-auto">
+
+
+
+                    <a class="nav-link upcomming-nav-link  ">Prices & Services</a>
+                    <a class="nav-link upcomming-nav-link  ">Warranty</a>
+                    <a class="nav-link upcomming-nav-link  ">Blog</a>
+                    <a class="nav-link upcomming-nav-link  ">Contact</a>
+                    <p>|</p>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+    <section class="welcome">
+
+
+        <h1>Welcome, <b>Vedant!</b> </h1>
+    </section>
+
+    <section class="main_service clearfix">
+        <div class="hamburger">
+            <span class="v-bar"></span>
+            <span class="v-bar"></span>
+            <span class="v-bar"></span>
+
+        </div>
+        <div class="tab" id="verticaltab">
+
+
+            <button class="tablinks" onclick="upcoming_service(event, 'dashboard')">Dashboard</button>
+            <button class="tablinks" onclick="upcoming_service(event, 'new_service_request')">New Service
+                Request</button>
+            <button class="tablinks" onclick="upcoming_service(event, 'upcoming_services')" id="defaultOpen">Upcoming
+                Services</button>
+            <button class="tablinks" onclick="upcoming_service(event, 'service_schedule')">Service
+                Schedule</button>
+            <button class="tablinks" onclick="upcoming_service(event, 'service_history')">Service
+                History</button>
+            <button class="tablinks" onclick="upcoming_service(event, 'my_ratings')">My Ratings</button>
+            <button class="tablinks" onclick="upcoming_service(event, 'block_customer')">Block
+                Customer</button>
+
+        </div>
+
+
+
+        
+
+        <div id="dashboard" class="tabcontent">
+            <h3>Dashboard</h3>
+        </div>
+        <div id="new_service_request" class="tabcontent">
+            <h3>New Service Request</h3>
+        </div>
+        <div id="upcoming_services" class="tabcontent">
+            <table class="table">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">Service ID <img src="image/sort.png" alt="..."></th>
+                        <th scope="col">Service date <img src="image/sort.png" alt="..."></th>
+                        <th scope="col">Customers details <img src="image/sort.png" alt="...">
+                        </th>
+                        <th scope="col">Distance <img src="image/sort.png" alt="..."></th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Service ID">323436</td>
+                        <td data-label="Service date">
+                            <img src="image/calendar2.png" alt="calender"> 09/04/2018 <br>
+                            <img src="image/layer-14.png" alt="clock"> 12:00-18:00
+                        </td>
+                        <td data-label="Customers details">
+                            David Bough <br>
+                            <img src="image/layer-15.png" alt="home">musterstrabe 5,12345
+                            Bonn
+                        </td>
+                        <td data-label="Distance">15km </td>
+                        <td data-label="Action"><button class="cancel">Cancel</button></td>
+                    </tr>
+                    <tr>
+                        <td>323437</td>
+                        <td>
+                            <img src="image/calendar2.png" alt="calender"> 09/04/2018 <br>
+                            <img src="image/layer-14.png" alt="clock"> 12:00-18:00
+                        </td>
+                        <td>
+                            David Bough <br>
+                            <img src="image/layer-15.png" alt="home">musterstrabe 5,12345
+                            Bonn
+                        </td>
+                        <td>10km </td>
+                        <td><button class="cancel">Cancel</button></td>
+                    </tr>
+                    <tr>
+                        <td>323438</td>
+                        <td>
+                            <img src="image/calendar2.png" alt="calender"> 09/04/2018 <br>
+                            <img src="image/layer-14.png" alt="clock"> 12:00-18:00
+                        </td>
+                        <td>
+                            David Bough <br>
+                            <img src="image/layer-15.png" alt="home">musterstrabe 5,12345
+                            Bonn
+                        </td>
+                        <td>15km </td>
+                        <td><button class="cancel">Cancel</button></td>
+                    </tr>
+                    <tr>
+                        <td>323439</td>
+                        <td>
+                            <img src="image/calendar2.png" alt="calender"> 09/04/2018 <br>
+                            <img src="image/layer-14.png" alt="clock"> 12:00-18:00
+                        </td>
+                        <td>
+                            David Bough <br>
+                            <img src="image/layer-15.png" alt="home">musterstrabe 5,12345
+                            Bonn
+                        </td>
+                        <td>15km </td>
+                        <td><button class="cancel">Cancel</button></td>
+                    </tr>
+                    <tr>
+                        <td>323440</td>
+                        <td>
+                            <img src="image/calendar2.png" alt="calender"> 09/04/2018 <br>
+                            <img src="image/layer-14.png" alt="clock"> 12:00-18:00
+                        </td>
+                        <td>
+                            David Bough <br>
+                            <img src="image/layer-15.png" alt="home">musterstrabe 5,12345
+                            Bonn
+                        </td>
+                        <td>10km </td>
+                        <td><button class="cancel">Cancel</button></td>
+                    </tr>
+                    <tr>
+                        <td>323441</td>
+                        <td>
+                            <img src="image/calendar2.png" alt="calender"> 09/04/2018 <br>
+                            <img src="image/layer-14.png" alt="clock"> 12:00-18:00
+                        </td>
+                        <td>
+                            David Bough <br>
+                            <img src="image/layer-15.png" alt="home">musterstrabe 5,12345
+                            Bonn
+                        </td>
+                        <td>25km </td>
+                        <td><button class="cancel">Cancel</button></td>
+                    </tr>
+                    <tr>
+                        <td>323442</td>
+                        <td>
+                            <img src="image/calendar2.png" alt="calender"> 09/04/2018 <br>
+                            <img src="image/layer-14.png" alt="clock"> 12:00-18:00
+                        </td>
+                        <td>
+                            David Bough <br>
+                            <img src="image/layer-15.png" alt="home">musterstrabe 5,12345
+                            Bonn
+                        </td>
+                        <td>15km </td>
+                        <td><button class="cancel">Cancel</button></td>
+                    </tr>
+                    <tr>
+                        <td>323443</td>
+                        <td>
+                            <img src="image/calendar2.png" alt="calender"> 09/04/2018 <br>
+                            <img src="image/layer-14.png" alt="clock"> 12:00-18:00
+                        </td>
+                        <td>
+                            David Bough <br>
+                            <img src="image/layer-15.png" alt="home">musterstrabe 5,12345
+                            Bonn
+                        </td>
+                        <td>05km </td>
+                        <td><button class="cancel">Cancel</button></td>
+                    </tr>
+                    <tr>
+                        <td>323444</td>
+                        <td>
+                            <img src="image/calendar2.png" alt="calender"> 09/04/2018 <br>
+                            <img src="image/layer-14.png" alt="clock"> 12:00-18:00
+                        </td>
+                        <td>
+                            David Bough <br>
+                            <img src="image/layer-15.png" alt="home">musterstrabe 5,12345
+                            Bonn
+                        </td>
+                        <td>15km </td>
+                        <td><button class="cancel">Cancel</button></td>
+                    </tr>
+                    <tr>
+                        <td>323445</td>
+                        <td>
+                            <img src="image/calendar2.png" alt="calender"> 09/04/2018 <br>
+                            <img src="image/layer-14.png" alt="clock"> 12:00-18:00
+                        </td>
+                        <td>
+                            David Bough <br>
+                            <img src="image/layer-15.png" alt="home">musterstrabe 5,12345
+                            Bonn
+                        </td>
+                        <td>05km </td>
+                        <td><button class="cancel">Cancel</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="service_schedule" class="tabcontent">
+            <h3>Service Schedule</h3>
+        </div>
+        <div id="service_history" class="tabcontent">
+            <h3> Service History</h3>
+        </div>
+        <div id="my_ratings" class="tabcontent">
+            <h3>My Ratings</h3>
+        </div>
+        <div id="block_customer" class="tabcontent">
+            <h3>Block Customers</h3>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--footer starts-->
+
+
+
+    <div class="row contact-row">
+
+
+        <div class="col contact-col-email">
+            <p class="contact-text">
+                GET OUR NEWSLETTER
+            </p>
+
+            <div class="row ">
+                <div class="col-sm-7 contact-email-col">
+                    <input class="contact-email-textbox" placeholder="  YOUR EMAIL">
+                </div>
+                <div class="col-sm-4 contact-submit-col">
+                    <button class="contact-submit-button">submit</button>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+    <div class="container-fluid footer-container">
+        <div class="row">
+            <div class="col-sm-3 footer-logo-col">
+                <img src="image/footer-logo.png" class="img-fluid footer-logo-image">
+
+
+            </div>
+            <div class="col-sm-6 footer-nav-col">
+
+                <a class="footer-nav-link ">HOME</a>
+                <a class="footer-nav-link ">ABOUT</a>
+                <a class="footer-nav-link ">TESTIMONIALS</a>
+                <a class="footer-nav-link ">FAQ</a>
+                <a class="footer-nav-link ">INSURANCE</a>
+                <a class="footer-nav-link ">IMPRESSUM</a>
+
+
+
+
+            </div>
+            <div class="col-sm-3 footer-social-col">
+
+                <img src="image/ic-facebook.png" class="img-fluid footer-social-image">
+                <img src="image/ic-instagram.png" class="img-fluid footer-social-image">
+
+                <hr>
+
+
+
+
+
+            </div>
+        </div>
+
+        <hr style="color: white; margin: 0% 5% 1% 5%">
+        <div>
+            <p class="faq-privacy-text">
+                ©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy
+            </p>
+        </div>
+        <br>
+
+        <!--footer ends-->
+
+
+
+
+
+        <!-- Optional JavaScript; choose one of the two! -->
+
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+
+
+            <script>
+
+
+                const hamburger = document.querySelector(".hamburger");
+                const vtab = document.querySelector(".tab");
+        
+                hamburger.addEventListener("click", () => {
+                hamburger.classList.toggle("active");
+                vtab.classList.toggle("active");
+                })
+                
+                document.querySelectorAll(".tablinks").forEach(n => n.addEventListener("click", () => {
+                hamburger.classList.remove("active");
+                vtab.classList.remove("active");
+                }))
+        
+        
+                function upcoming_service(evt, service) {
+                    var i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(service).style.display = "block";
+                    evt.currentTarget.className += " active";
+                }
+                document.getElementById("defaultOpen").click();
+            </script>
+        
+
+
+</body>
+
+</html>

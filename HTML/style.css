@@ -874,17 +874,19 @@ height: 54px;
     background-size: cover;
     position: relative;
     text-align: center;
+    
+    
    
    
 }
 
 .become-service-provider-form{
     background-color: white;
-    margin-left: 36%;
-    margin-right: 36%;
+    max-width: 430px;
     box-shadow: 0px 0px 16px #00000026;
     padding: 2%;
     text-align: center;
+    margin:auto
 
 }
 
@@ -953,7 +955,208 @@ color: white;
 /*Service provider>become service provider  ends*/
 
 
+/*Service provider>upcomming service provider  starts*/
+
+.upcomming-nav-link{
+    
+    font-size: 16px;
+}
 
 
 
 
+@media screen and (max-width: 600px) {
+    .main_service {
+        padding-top: 31px;
+    }
+
+    table {
+        border: 1px;
+        width: 100%;
+    }
+
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+    }
+
+    table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        text-align: left;
+    }
+
+    table td:last-child {
+        border-bottom: 0;
+        margin-bottom: 10px;
+    }
+}
+
+
+
+.header-image {
+    padding: 0 0;
+    max-height: 54px;
+}
+
+.nav-item {
+    padding-right: 20px;
+    padding-top: 21px;
+    padding-bottom: 23px;
+    font-size: 17px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+.vl {
+    border-left: 3px solid #FFFFFF;
+    height: 40px;
+}
+
+.welcome {
+    text-align: center;
+    font-size: 30px;
+    color: #4F4F4F;
+    background-color: #F9F9F9;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+@media screen and (min-width: 600px) {
+    .main_service {
+        padding-top: 31px;
+        margin-left: 15%;
+        margin-right: 15%;
+        padding-bottom: 30px;
+    }
+}
+
+.clearfix::after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+
+
+.tab {
+    float: left;
+    border: 1px solid #ffffff;
+    background-color: #1d7a8c;
+    width: 23%;
+    font-weight: 400;
+    height: 100%;
+}
+
+.tab button {
+    display: block;
+    background-color: inherit;
+    color: white;
+    padding: 15px 16px;
+    width: 100%;
+    border: 1px solid #ffffff;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.tab button:hover {
+    background-color: #146371;
+}
+
+
+.tab button.active {
+    background-color: #146371;
+}
+
+.tabcontent {
+    float: left;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    width: 75%;
+    
+    margin-left: 10px;
+}
+
+th {
+    padding-right: 30px;
+}
+
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background-color: #1d7a8c;
+    width: 35px;
+    float: left;
+}
+
+.hamburger .v-bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+@media(max-width:720px) {
+    .hamburger {
+        display: block;
+    }
+
+    .hamburger.active .v-bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .v-bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    
+    .hamburger.active .v-bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    .tab
+    {
+        position: fixed;
+        left: -100%;
+        gap: 0;				
+        background-color: #146371;
+        width: 100%;
+        text-align: center;
+        transition: 0.2s;
+        
+    }
+    .tab.active{
+        left: 0;
+        position: relative;
+    }
+
+}
+
+
+
+
+
+.cancel {
+    border: 1px solid #FF6B6B;
+    border-radius: 17px;
+    background-color: #FF6B6B;
+    color: #FFFFFF;
+    font-size: 16px;
+}
+
+
+/*Service provider>upcomming service provider  ends*/

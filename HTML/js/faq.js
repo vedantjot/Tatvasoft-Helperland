@@ -12,3 +12,4 @@ function changeImage() {
         document.getElementById("faq-bullet-img").src = "image/down-arrow.png";
     }
 }
+

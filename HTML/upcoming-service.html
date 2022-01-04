@@ -1,0 +1,661 @@
+<!-- 
+
+
+
+
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="css/Upcoming.css" />
+
+
+	<title>Upcoming Service</title>
+
+</head>
+
+<body>
+	
+
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark">
+
+
+		<div class="container-fluid">
+
+			<a class="navbar-brand" href="Home.html">
+				<img src="assets/logo-small.png" class=" navbar-brand nav-logo ">
+			</a>
+
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+				aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				
+				<div class="navbar-nav ms-auto">
+
+					<a href="#" class="nav-link  rounded-pill ">Prices & services</a>
+					<a href="#" class="nav-link  rounded-pill">Warranty</a>
+					<a href="#" class="nav-link  rounded-pill">Blog</a>
+					<a href="#" class="nav-link  rounded-pill ">Contact</a>
+
+					<div class="notification position-relative nav-item">
+						<img src="assets/icon-notification.png" alt="">
+						<span class="badge rounded-circle position-absolute">2</span>
+					    </div>
+					
+					
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+
+	</nav>
+
+
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="js/upcoming.js"></script>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+		crossorigin="anonymous">
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+		@media screen and (max-width: 600px) {
+			.main_service {
+				padding-top: 31px;
+			}
+
+			table {
+				border: 1px;
+				width: 100%;
+			}
+
+			table thead {
+				border: none;
+				clip: rect(0 0 0 0);
+				height: 1px;
+				margin: -1px;
+				overflow: hidden;
+				padding: 0;
+				position: absolute;
+				width: 1px;
+			}
+
+			table tr {
+				border-bottom: 3px solid #ddd;
+				display: block;
+			}
+
+			table td {
+				border-bottom: 1px solid #ddd;
+				display: block;
+				text-align: left;
+			}
+
+			table td:last-child {
+				border-bottom: 0;
+				margin-bottom: 10px;
+			}
+		}
+
+		body {
+			font-family: 'Roboto', sans-serif;
+		}
+
+		.header-image {
+			padding: 0 0;
+			max-height: 54px;
+		}
+
+		.nav-item {
+			padding-right: 20px;
+			padding-top: 21px;
+			padding-bottom: 23px;
+			font-size: 17px;
+			font-weight: 400;
+			color: #FFFFFF;
+		}
+
+		.vl {
+			border-left: 3px solid #FFFFFF;
+			height: 40px;
+		}
+
+		.welcome {
+			text-align: center;
+			font-size: 30px;
+			color: #4F4F4F;
+			background-color: #F9F9F9;
+			padding-top: 40px;
+			padding-bottom: 40px;
+		}
+
+		@media screen and (min-width: 600px) {
+			.main_service {
+				padding-top: 31px;
+				margin-left: 15%;
+				margin-right: 15%;
+				padding-bottom: 30px;
+			}
+		}
+
+		.clearfix::after {
+			content: '';
+			clear: both;
+			display: block;
+		}
+
+
+
+		.tab {
+			float: left;
+			border: 1px solid #ffffff;
+			background-color: #1d7a8c;
+			width: 23%;
+			font-weight: 400;
+		}
+
+		.tab button {
+			display: block;
+			background-color: inherit;
+			color: black;
+			padding: 22px 16px;
+			width: 100%;
+			border: 1px solid #ffffff;
+			text-align: left;
+			cursor: pointer;
+			transition: 0.3s;
+			font-size: 17px;
+		}
+
+		.tab button:hover {
+			background-color: #146371;
+		}
+
+
+		.tab button.active {
+			background-color: #146371;
+		}
+
+		.tabcontent {
+			float: left;
+			padding: 0px 12px;
+			border: 1px solid #ccc;
+			width: 75%;
+			border-left: none;
+			margin-left: 10px;
+		}
+
+		th {
+			padding-right: 30px;
+		}
+
+
+		.hamburger {
+			display: none;
+			cursor: pointer;
+			background-color: #1d7a8c;
+			width: 35px;
+			float: left;
+		}
+
+		.hamburger .v-bar {
+			display: block;
+			width: 25px;
+			height: 3px;
+			margin: 5px auto;
+			background-color: white;
+			transition: all 0.3s ease-in-out;
+		}
+
+		@media(max-width:720px) {
+			.hamburger {
+				display: block;
+			}
+
+			.hamburger.active .v-bar:nth-child(2) {
+				opacity: 0;
+			}
+
+			.hamburger.active .v-bar:nth-child(1) {
+				transform: translateY(8px) rotate(45deg);
+			}
+			
+			.hamburger.active .v-bar:nth-child(3) {
+				transform: translateY(-8px) rotate(-45deg);
+			}
+			.tab
+			{
+				position: fixed;
+				left: -100%;
+				gap: 0;				
+				background-color: #146371;
+				width: 100%;
+				text-align: center;
+				transition: 0.2s;
+				
+			}
+			.tab.active{
+				left: 0;
+				position: relative;
+			}
+		
+		}
+
+
+
+
+
+		.cancel {
+			border: 1px solid #FF6B6B;
+			border-radius: 17px;
+			background-color: #FF6B6B;
+			color: #FFFFFF;
+			font-size: 16px;
+		}
+
+		.footer {
+			background-color: #111111;
+			padding-top: 20px;
+		}
+
+		.footer .footer-menu {
+			margin-left: 5px;
+			margin-right: 5px;
+			color: #F1F1F1;
+			font-size: 14px;
+			font-family: 'Roboto', sans-serif;
+			font-weight: 400;
+		}
+
+		.footer .fb {
+			margin-right: 20px;
+		}
+
+		.footer .footer-end {
+			margin-top: 10px;
+			text-align: left;
+			letter-spacing: 0px;
+			color: #9BA0A3;
+			font-size: 14px;
+			font-family: 'Roboto', sans-serif;
+			font-weight: 400;
+			padding-bottom: 5px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container-fluid  header-container" style="background-color: #A3A3A3;">
+		<nav class="navbar navbar-expand-lg navbar-light text-center">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#"><img src="assets/logo-large.png" class="header-image"
+						alt="" ;></a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<div class="navbar-nav ms-auto">
+						<ul class="navbar-nav">
+
+							<li class="nav-item">
+								<a class="nav-link text-white" href="#">Prices &
+									services</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-white" href="#">Warrenty</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-white" href="#">Blog</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-white" href="#">Contact</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link " href="#"> <img
+										src="assets/user.png" alt="..."> <img
+										src="assets/sp-arrow-down.png"
+										class="img-fluid" alt="..."> </a>
+							</li>
+
+						</ul>
+
+					</div>
+				</div>
+
+				<div class="navbar-nav">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<div class="vl"></div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#"> <img
+									src="assets/icon-notification.png"
+									class="img-fluid" alt="..."> </a>
+						</li>
+						<li class="nav-item">
+							<div class="vl"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+	<section class="welcome">
+		
+	
+		<h1>Welcome, <b>Ankit!</b> </h1>
+	</section>
+
+	<section class="main_service clearfix">
+		<div class="hamburger">
+			<span  class="v-bar"></span>
+			<span class="v-bar"></span>
+			<span class="v-bar"></span>
+
+		</div>	
+		<div class="tab" id="verticaltab">
+			
+			
+			<button class="tablinks" onclick="upcoming_service(event, 'dashboard')">Dashboard</button>
+			<button class="tablinks" onclick="upcoming_service(event, 'new_service_request')">New Service
+				Request</button>
+			<button class="tablinks" onclick="upcoming_service(event, 'upcoming_services')"
+				id="defaultOpen">Upcoming Services</button>
+			<button class="tablinks" onclick="upcoming_service(event, 'service_schedule')">Service
+				Schedule</button>
+			<button class="tablinks" onclick="upcoming_service(event, 'service_history')">Service
+				History</button>
+			<button class="tablinks" onclick="upcoming_service(event, 'my_ratings')">My Ratings</button>
+			<button class="tablinks" onclick="upcoming_service(event, 'block_customer')">Block
+				Customer</button>
+			
+		</div>
+
+
+
+		</div>
+
+		<div id="dashboard" class="tabcontent">
+			<h3>Dashboard</h3>
+		</div>
+		<div id="new_service_request" class="tabcontent">
+			<h3>New Service Request</h3>
+		</div>
+		<div id="upcoming_services" class="tabcontent">
+			<table class="table">
+				<thead class="table-light">
+					<tr>
+						<th scope="col">Service ID <img src="assets/sort.png" alt="..."></th>
+						<th scope="col">Service date <img src="assets/sort.png" alt="..."></th>
+						<th scope="col">Customers details <img src="assets/sort.png" alt="...">
+						</th>
+						<th scope="col">Distance <img src="assets/sort.png" alt="..."></th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td data-label="Service ID">323436</td>
+						<td data-label="Service date">
+							<img src="assets/calendar2.png" alt="calender"> 09/04/2018 <br>
+							<img src="assets/layer-14.png" alt="clock"> 12:00-18:00
+						</td>
+						<td data-label="Customers details">
+							David Bough <br>
+							<img src="assets/layer-15.png" alt="home">musterstrabe 5,12345
+							Bonn
+						</td>
+						<td data-label="Distance">15km </td>
+						<td data-label="Action"><button class="cancel">Cancel</button></td>
+					</tr>
+					<tr>
+						<td>323437</td>
+						<td>
+							<img src="assets/calendar2.png" alt="calender"> 09/04/2018 <br>
+							<img src="assets/layer-14.png" alt="clock"> 12:00-18:00
+						</td>
+						<td>
+							David Bough <br>
+							<img src="assets/layer-15.png" alt="home">musterstrabe 5,12345
+							Bonn
+						</td>
+						<td>10km </td>
+						<td><button class="cancel">Cancel</button></td>
+					</tr>
+					<tr>
+						<td>323438</td>
+						<td>
+							<img src="assets/calendar2.png" alt="calender"> 09/04/2018 <br>
+							<img src="assets/layer-14.png" alt="clock"> 12:00-18:00
+						</td>
+						<td>
+							David Bough <br>
+							<img src="assets/layer-15.png" alt="home">musterstrabe 5,12345
+							Bonn
+						</td>
+						<td>15km </td>
+						<td><button class="cancel">Cancel</button></td>
+					</tr>
+					<tr>
+						<td>323439</td>
+						<td>
+							<img src="assets/calendar2.png" alt="calender"> 09/04/2018 <br>
+							<img src="assets/layer-14.png" alt="clock"> 12:00-18:00
+						</td>
+						<td>
+							David Bough <br>
+							<img src="assets/layer-15.png" alt="home">musterstrabe 5,12345
+							Bonn
+						</td>
+						<td>15km </td>
+						<td><button class="cancel">Cancel</button></td>
+					</tr>
+					<tr>
+						<td>323440</td>
+						<td>
+							<img src="assets/calendar2.png" alt="calender"> 09/04/2018 <br>
+							<img src="assets/layer-14.png" alt="clock"> 12:00-18:00
+						</td>
+						<td>
+							David Bough <br>
+							<img src="assets/layer-15.png" alt="home">musterstrabe 5,12345
+							Bonn
+						</td>
+						<td>10km </td>
+						<td><button class="cancel">Cancel</button></td>
+					</tr>
+					<tr>
+						<td>323441</td>
+						<td>
+							<img src="assets/calendar2.png" alt="calender"> 09/04/2018 <br>
+							<img src="assets/layer-14.png" alt="clock"> 12:00-18:00
+						</td>
+						<td>
+							David Bough <br>
+							<img src="assets/layer-15.png" alt="home">musterstrabe 5,12345
+							Bonn
+						</td>
+						<td>25km </td>
+						<td><button class="cancel">Cancel</button></td>
+					</tr>
+					<tr>
+						<td>323442</td>
+						<td>
+							<img src="assets/calendar2.png" alt="calender"> 09/04/2018 <br>
+							<img src="assets/layer-14.png" alt="clock"> 12:00-18:00
+						</td>
+						<td>
+							David Bough <br>
+							<img src="assets/layer-15.png" alt="home">musterstrabe 5,12345
+							Bonn
+						</td>
+						<td>15km </td>
+						<td><button class="cancel">Cancel</button></td>
+					</tr>
+					<tr>
+						<td>323443</td>
+						<td>
+							<img src="assets/calendar2.png" alt="calender"> 09/04/2018 <br>
+							<img src="assets/layer-14.png" alt="clock"> 12:00-18:00
+						</td>
+						<td>
+							David Bough <br>
+							<img src="assets/layer-15.png" alt="home">musterstrabe 5,12345
+							Bonn
+						</td>
+						<td>05km </td>
+						<td><button class="cancel">Cancel</button></td>
+					</tr>
+					<tr>
+						<td>323444</td>
+						<td>
+							<img src="assets/calendar2.png" alt="calender"> 09/04/2018 <br>
+							<img src="assets/layer-14.png" alt="clock"> 12:00-18:00
+						</td>
+						<td>
+							David Bough <br>
+							<img src="assets/layer-15.png" alt="home">musterstrabe 5,12345
+							Bonn
+						</td>
+						<td>15km </td>
+						<td><button class="cancel">Cancel</button></td>
+					</tr>
+					<tr>
+						<td>323445</td>
+						<td>
+							<img src="assets/calendar2.png" alt="calender"> 09/04/2018 <br>
+							<img src="assets/layer-14.png" alt="clock"> 12:00-18:00
+						</td>
+						<td>
+							David Bough <br>
+							<img src="assets/layer-15.png" alt="home">musterstrabe 5,12345
+							Bonn
+						</td>
+						<td>05km </td>
+						<td><button class="cancel">Cancel</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div id="service_schedule" class="tabcontent">
+			<h3>Service Schedule</h3>
+		</div>
+		<div id="service_history" class="tabcontent">
+			<h3> Service History</h3>
+		</div>
+		<div id="my_ratings" class="tabcontent">
+			<h3>My Ratings</h3>
+		</div>
+		<div id="block_customer" class="tabcontent">
+			<h3>Block Customers</h3>
+		</div>
+	</section>
+
+	<div class="footer">
+		<div class="container">
+			<div class="row justify-content-center d-flex align-content-center">
+				<div class="col-lg-2 text-center">
+					<img src="assets/footer-logo.png" alt="">
+				</div>
+				<div class="col-lg-8">
+					<div class="footer-navbar text-center p-4">
+						<a class="footer-menu" href="#">HOME</a>
+						<a class="footer-menu" href="#">ABOUT</a>
+						<a class="footer-menu" href="#">TESTIMONIALS</a>
+						<a class="footer-menu" href="#">FAQS</a>
+						<a class="footer-menu" href="#">INSURANCE</a>
+						<a class="footer-menu" href="#">POLICY</a>
+						<a class="footer-menu" href="#">IMPRESSUM</a>
+					</div>
+				</div>
+				<div class="col-lg-2 text-center">
+					<a href="#"><img src="assets/ic-facebook.png" alt="fb" class="fb"></a>
+					<a href="#"><img src="assets/ic-instagram.png" alt="insta" class="insta"></a>
+				</div>
+			</div>
+			<hr>
+			<div class="text-center footer-end">
+				<p>©2018 Helperland. All rights reserved. Terms and Conditions | Privacy Policy</p>
+			</div>
+		</div>
+	</div>
+
+	<script>
+
+
+		const hamburger = document.querySelector(".hamburger");
+		const vtab = document.querySelector(".tab");
+
+		hamburger.addEventListener("click", () => {
+		hamburger.classList.toggle("active");
+		vtab.classList.toggle("active");
+		})
+		
+		document.querySelectorAll(".tablinks").forEach(n => n.addEventListener("click", () => {
+		hamburger.classList.remove("active");
+		vtab.classList.remove("active");
+		}))
+
+
+		function upcoming_service(evt, service) {
+			var i, tabcontent, tablinks;
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+			tablinks = document.getElementsByClassName("tablinks");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
+			}
+			document.getElementById(service).style.display = "block";
+			evt.currentTarget.className += " active";
+		}
+		document.getElementById("defaultOpen").click();
+	</script>
+
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+		integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+		integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+		crossorigin="anonymous"></script>
+
+</body>
+
+</html>
