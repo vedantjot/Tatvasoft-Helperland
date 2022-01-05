@@ -962,6 +962,17 @@ color: white;
     font-size: 16px;
 }
 
+.become-nav-bell{
+    border-right: 1px solid #e1e1e1;
+    border-left: 1px solid #e1e1e1;
+    padding: 0px 5px 0px 5px;
+    
+ 
+
+}
+
+
+
 
 
 
@@ -1160,3 +1171,55 @@ th {
 
 
 /*Service provider>upcomming service provider  ends*/
+
+
+
+/*service history*/
+
+.completed {
+    border: 1px solid #67b644;
+    background-color: #67b644;
+    color: #ffffff;
+    font-size: 13px;
+}
+
+.rate {
+    border: 1px solid #6DA9B5;
+    border-radius: 17px;
+    background-color: #6DA9B5;
+    color: #FFFFFF;
+    font-size: 14px;
+    padding: 5px 12px;
+}
+
+.cancelled {
+    border: 1px solid #ff6b6b;
+    background-color: #ff6b6b;
+    color: #ffffff;
+    font-size: 13px;
+}
+.price {
+    font-size: 20px;
+    color: #1d7a8c;
+    font-weight: 700;
+}
+.alignleft {
+    float: left;
+    padding-left: 10px;
+    font-size: 22px;
+    color: #646464;
+}
+
+.alignright {
+    float: right;
+    background-color: #146371;
+    color: #ffffff;
+    font-size: 14px;
+    border-radius: 17px;
+    border: 1px solid #146371;
+    margin-right: 10px;
+    padding: 5px 12px;
+}
+
+
+/*service history ends*/
