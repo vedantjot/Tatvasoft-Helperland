@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace helperland1._0.Controllers
 {
-    public class HomeController : Controller
+    public class PublicController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<PublicController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public PublicController(ILogger<PublicController> logger)
         {
             _logger = logger;
         }
@@ -24,6 +24,18 @@ namespace helperland1._0.Controllers
         }
 
         public IActionResult Price()
+        {
+            return View();
+        }
+        public IActionResult Faq()
+        {
+            return View();
+        }
+        public IActionResult Contactus()
+        {
+            return View();
+        }
+        public IActionResult About()
         {
             return View();
         }

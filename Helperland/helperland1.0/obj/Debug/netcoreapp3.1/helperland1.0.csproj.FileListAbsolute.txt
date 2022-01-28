@@ -366,7 +366,6 @@ E:\tatvasoft\Tatvasoft-helperland\Helperland\helperland1.0\obj\Debug\netcoreapp3
 E:\tatvasoft\Tatvasoft-helperland\Helperland\helperland1.0\obj\Debug\netcoreapp3.1\helperland1.0.TagHelpers.input.cache
 E:\tatvasoft\Tatvasoft-helperland\Helperland\helperland1.0\obj\Debug\netcoreapp3.1\helperland1.0.TagHelpers.output.cache
 E:\tatvasoft\Tatvasoft-helperland\Helperland\helperland1.0\obj\Debug\netcoreapp3.1\helperland1.0.RazorCoreGenerate.cache
-E:\tatvasoft\Tatvasoft-helperland\Helperland\helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 E:\tatvasoft\Tatvasoft-helperland\Helperland\helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 E:\tatvasoft\Tatvasoft-helperland\Helperland\helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 E:\tatvasoft\Tatvasoft-helperland\Helperland\helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -379,4 +378,8 @@ E:\tatvasoft\Tatvasoft-helperland\Helperland\helperland1.0\obj\Debug\netcoreapp3
 E:\tatvasoft\Tatvasoft-helperland\Helperland\helperland1.0\obj\Debug\netcoreapp3.1\helperland1.0.dll
 E:\tatvasoft\Tatvasoft-helperland\Helperland\helperland1.0\obj\Debug\netcoreapp3.1\helperland1.0.pdb
 E:\tatvasoft\Tatvasoft-helperland\Helperland\helperland1.0\obj\Debug\netcoreapp3.1\helperland1.0.genruntimeconfig.cache
-E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Home\price.cshtml.g.cs
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Public\Index.cshtml.g.cs
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Public\price.cshtml.g.cs
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Public\about.cshtml.g.cs
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Public\contactus.cshtml.g.cs
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Public\faq.cshtml.g.cs
