@@ -1,3 +1,4 @@
+using helperland1._0.Models.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +25,9 @@ namespace helperland1._0
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<HelperlandContext>();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +54,7 @@ namespace helperland1._0
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Public}/{action=Index}/{id?}");
+                    pattern: "{controller=UserManagement}/{action=CustomerSignUp}/{id?}");
             });
         }
     }

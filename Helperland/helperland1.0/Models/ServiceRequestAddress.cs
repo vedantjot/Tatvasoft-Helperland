@@ -16,7 +16,6 @@ namespace helperland1._0.Models
         public string PostalCode { get; set; }
         public string Mobile { get; set; }
         public string Email { get; set; }
-        public int? Type { get; set; }
 
         public virtual ServiceRequest ServiceRequest { get; set; }
     }

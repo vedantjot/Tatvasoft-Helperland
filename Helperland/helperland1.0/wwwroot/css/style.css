@@ -27,11 +27,14 @@
 /*header*/
 
 
-
-
+.formwarning{
+    text-align:left;
+    font-size: 12px;
+    color:red;
+    font-weight:100;
+}
 .header-container {
     background-image: url("../image/LandingPagebackgroundimage.png");
-
     height: auto;
     background-position: center center;
     background-repeat: no-repeat;
@@ -855,24 +858,15 @@ height: 54px;
 
 /*Service provider>become service provider  starts*/
 
-.become-service-provider-header-container{
-    
-    
-  
-
-    background-image: url("image/become-a-pro-banner.png");
-    
-    height: auto;
+.become-service-provider-header-container {
    
+    background-image: url("../image/become-a-pro-banner.png");
+    height: auto;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
     text-align: center;
-    
-    
-   
-   
 }
 
 .become-service-provider-form{
