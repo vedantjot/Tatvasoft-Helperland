@@ -546,7 +546,6 @@
 
   </div>
 
-  @await Html.PartialAsync("loginpopup")
 
   <!--customer section ends-->
 
@@ -615,6 +614,10 @@
 
 
 
+    @await Html.PartialAsync("loginpopup")
+  @await Html.PartialAsync("ForgetPwd")
+
+
   <!-- Optional JavaScript; choose one of the two! -->
 
   <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -627,9 +630,9 @@
         if (url == "loginModal=true" || url == "loginFail=true") {
             document.getElementById("login-nav-link").click();
         }
-       // if (url == "mailSended=true") {
-        //    document.getElementById("mailSendedbtn").click();
-        //}
+        if (url == "mailSended=true") {
+          document.getElementById("mailSendedbtn").click();
+        }
     </script>
 
 

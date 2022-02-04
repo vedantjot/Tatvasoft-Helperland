@@ -388,3 +388,8 @@ E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3
 E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\UserManagement\CustomerSignUp.cshtml.g.cs
 E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Customer\CustomerServiceHistory.cshtml.g.cs
 E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Shared\loginpopup.cshtml.g.cs
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Shared\ForgetPwd.cshtml.g.cs
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\bin\Debug\netcoreapp3.1\MailKit.dll
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\bin\Debug\netcoreapp3.1\MimeKit.dll
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Shared\ResetPassword.cshtml.g.cs

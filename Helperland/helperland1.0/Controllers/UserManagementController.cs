@@ -1,9 +1,12 @@
 ﻿using helperland1._0.Models;
 using helperland1._0.Models.Data;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MimeKit;
 using System;
 using System.Linq;
+
 
 namespace helperland1._0.Controllers
 {
@@ -135,5 +138,66 @@ namespace helperland1._0.Controllers
 
         }
 
+        [HttpPost]
+        public IActionResult SendMail(string email)
+        {
+
+            if (email != null)
+            {
+                var user = _db.Users.FirstOrDefault(x => x.Email == email);
+
+
+                MimeMessage message = new MimeMessage();
+
+                MailboxAddress from = new MailboxAddress("Helperland",
+                "vedantjotangiya@gmail.com");
+                message.From.Add(from);
+
+                MailboxAddress to = new MailboxAddress(user.FirstName, email);
+                message.To.Add(to);
+
+                message.Subject = "Reset Password";
+
+                BodyBuilder bodyBuilder = new BodyBuilder();
+                bodyBuilder.HtmlBody = "<h1>Reset your password by click below link</h1>" +
+                    "<a href='" + Url.Action("ResetPassword", "UserManagement", new { userId = user.UserId }, "https") + "'>Reset Password</a>";
+
+
+                message.Body = bodyBuilder.ToMessageBody();
+
+                SmtpClient client = new SmtpClient();
+                client.Connect("smtp.gmail.com", 587, false);
+                client.Authenticate("", "");
+                client.Send(message);
+                client.Disconnect(true);
+                client.Dispose();
+                return RedirectToAction("Index", "Public", new { mailSended = "true" });
+            }
+            return RedirectToAction("Index", "Public");
+        }
+
+
+        [HttpGet]
+        public IActionResult ResetPassword(int userId)
+        {
+            TempData["id"] = userId;
+            return PartialView();
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword(ResetPassword rp)
+        {
+            var user = new User() { UserId = rp.userId, Password = rp.password, ModifiedDate = DateTime.Now };
+            _db.Users.Attach(user);
+            _db.Entry(user).Property(x => x.Password).IsModified = true;
+            _db.Entry(user).Property(x => x.Password).IsModified = true;
+            _db.SaveChanges();
+
+
+            return RedirectToAction("Index", "Public", new { loginModal = "true" });
+        }
+
     }
 }
+
+
