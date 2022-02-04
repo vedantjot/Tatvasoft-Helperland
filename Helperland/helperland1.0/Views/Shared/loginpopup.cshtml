@@ -1,0 +1,43 @@
+﻿@model helperland1._0.Models.LoginUser 
+<!-- Modal -->
+    <div class="modal fade  " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login to your account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                 <div class="@TempData["add"] alert-danger alert-dismissible fade" role="alert" id="loginFailAlert">
+                    @TempData["fail"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <form asp-controller="UserManagement" asp-action="Login" method='post' method='post'>
+                    <div class="modal-body ">
+
+                        <input type="text" asp-for="username" class="form-control" placeholder="Email address">
+                         
+                        <br />
+                        <input type="password" asp-for="password" class="form-control" placeholder="Password">
+                         
+                        <div class="form-check" style="text-align:left">
+                            <input type="checkbox" asp-for="remember" class="form-check-input" id="">
+                            <label class="form-check-label" for="exampleCheck1">Remember me</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <Button type="submit" class="nav-link faq-nav-link  faq-nav-link-border mx-auto">Login</Button>
+
+
+
+                    </div>
+                </form>
+                <a href="#">Forgot password?</a>
+                <p>Don't have and account? <a href="#">Register Now</a></p>
+            </div>
+
+
+        </div>
+    </div>
