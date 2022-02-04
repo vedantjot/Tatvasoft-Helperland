@@ -13,7 +13,10 @@
 
   <div class="container-fluid  contact-form-container">
 
-
+      <div class="@TempData["add"] alert-danger alert-dismissible fade" role="alert" id="loginFailAlert">
+                    @TempData["msg"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
     <form asp-controller="UserManagement" asp-action="CustomerSignUp" method='post' >
       <div class="row">
         <div class=" col-sm-6">

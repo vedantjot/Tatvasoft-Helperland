@@ -10,8 +10,11 @@
                 </div>
                  <div class="@TempData["add"] alert-danger alert-dismissible fade" role="alert" id="loginFailAlert">
                     @TempData["fail"]
+                    @TempData["msg"]
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+
+               
 
                 <form asp-controller="UserManagement" asp-action="Login" method='post' method='post'>
                     <div class="modal-body ">
@@ -35,7 +38,7 @@
                     </div>
                 </form>
                 <a href="#">Forgot password?</a>
-                <p>Don't have and account? <a href="#">Register Now</a></p>
+                <p>Don't have and account? <a asp-controller="UserManagement" asp-action="CustomerSignUp">Register Now</a></p>
             </div>
 
 

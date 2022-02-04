@@ -25,6 +25,7 @@ namespace helperland1._0.Controllers
             {
                 var obj = _db.Users.FirstOrDefault(x => x.UserId == Id);
                 ViewBag.Name = obj.FirstName;
+
                 return View();
             }
             else

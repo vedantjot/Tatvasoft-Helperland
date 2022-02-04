@@ -73,15 +73,17 @@ namespace helperland1._0.Controllers
                     _db.Users.Add(user);
                     _db.SaveChanges();
 
-
+                    TempData["add"] = "alert show";
+                    TempData["msg"] = "Account created, Wait for admin approval";
                     return RedirectToAction("Index", "Public");
 
 
                 }
                 else
                 {
-                    ViewBag.message = "User already exist.";
-                    return RedirectToAction("Index", "Public");
+                    TempData["add"] = "alert show";
+                    TempData["msg"] = "Username Exits!";
+                    return View();
 
 
                 }
@@ -114,15 +116,17 @@ namespace helperland1._0.Controllers
                     _db.Users.Add(user);
                     _db.SaveChanges();
 
-
-                    return RedirectToAction("Index", "Public");
+                    TempData["add"] = "alert show";
+                    TempData["msg"] = "Account created, Please Login";
+                    return RedirectToAction("Index", "Public", new { loginModal = "true" });
 
 
                 }
                 else
                 {
-                    ViewBag.message = "User already exist.";
-                    return RedirectToAction("Index", "Public");
+                    TempData["add"] = "alert show";
+                    TempData["msg"] = "Username Exits!";
+                    return View();
 
 
                 }
