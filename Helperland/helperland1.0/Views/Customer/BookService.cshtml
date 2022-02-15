@@ -42,7 +42,7 @@
 							src="~/image/setup-service.png" alt=".."> Setup service</button>
 					<button class="tablinks" onclick="set_service(event, 'schedule')" id="form2Btn"><img src="~/image/schedule.png"
 							alt=".."> Schedule & Plan</button>
-					<button class="tablinks" onclick="set_service(event, 'your_details')"><img src="~/image/details.png"
+					<button class="tablinks" onclick="set_service(event, 'your_details')" id="form3Btn"><img src="~/image/details.png"
 							alt=".."> Your Details</button>
 					<button class="tablinks" onclick="set_service(event, 'make_payment')" ><img
 							src="~/image/payment.png" alt=".."> Make Payment</button>
@@ -129,7 +129,7 @@
 							</div>
 							<div class="col">
 								<p class="card-text text-end price">
-									$87
+									$ <span id="total_price">83</span>
 								</p>
 							</div>
 						</div>
@@ -142,7 +142,7 @@
 							</div>
 							<div class="col">
 								<p class="card-text text-end price">
-									-$27
+									-$ <span id="discount">10</span>
 								</p>
 							</div>
 						</div>
@@ -156,7 +156,7 @@
 							</div>
 							<div class="col">
 								<p class="card-text text-end total_price">
-									$63
+									$ <span id="priceAfterDiscount">73</span>
 								</p>
 							</div>
 						</div>
@@ -168,11 +168,11 @@
 							</div>
 							<div class="col">
 								<p class="card-text text-end effective_price">
-									$50.4
+									$ <span id="priceAfterPromo">63</span>
 								</p>
 							</div>
 						</div>
-						<p class="card-text saving">*You will save 20% according to §35a EStG.</p>
+						<p class="card-text saving">*You will save $10 according to §35a EStG.</p>
 					</div>
 					<div class="card-footer">
 						<img src="~/image/smiley.png" alt=".."> See what is always included
@@ -266,6 +266,9 @@
 
 		}
 
+
+		 
+
 		
 
 
@@ -320,7 +323,9 @@
                 data: data,
                 success: function (result) {
                     if (result.value == "true") {
-                        form3();
+                        ClickFunction("form3Btn");
+						loadAddress();
+
                     }
                     else {
                         alert("schedule is not valid");
@@ -331,7 +336,41 @@
                     console.log('Failed ');
                 }
             });
-        }
+         }
+
+
+	       function loadAddress() {
+
+			    var data = $("#form1").serialize();
+
+			 alert("Inside load address")
+
+					$.ajax({
+						type: 'get',
+						url: '/customer/detailsservice',
+						contenttype: 'application/x-www-form-urlencoded; charset=utf-8',
+						 data: data,
+
+						success: function (result) {
+							var address = $("#address");
+							address.empty();
+							for (let i = 0; i < result.length; i++) {
+								var checked = "";
+								if (result[i].isdefault == true) {
+									checked = "checked";
+								}
+								address.append('<div><input type="radio" id="address' + i + '"' + checked + ' value="' + result[i].addressid + '" name="bookaddress"><label for="address' + i + '"><p><b>address:</b> ' + result[i].addressline2 + ' ' + result[i].addressline1 + ', ' + result[i].city + ' ' + result[i].postalcode + '</p ><p><b>phone number:</b> ' + result[i].mobile + '</p></label></div>');
+								checked = "";
+							}
+							console.log(result);
+						},
+						error: function () {
+							alert('failed to receive the data');
+							console.log('failed ');
+						}
+					});
+				}
+
 
 
 

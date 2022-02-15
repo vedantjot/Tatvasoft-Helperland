@@ -7,6 +7,7 @@ using helperland1._0.ViewModel;
 
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace helperland1._0.Controllers
 {
@@ -88,9 +89,7 @@ namespace helperland1._0.Controllers
 
             if (list.Count() > 0)
             {
-                //CookieOptions cookiePostalcode = new CookieOptions();
-                //cookiePostalcode.Expires = DateTime.Now.AddMinutes(30);
-                //Response.Cookies.Append("postalCode", setup.PostalCode, cookiePostalcode);
+                
 
               
 
@@ -120,6 +119,38 @@ namespace helperland1._0.Controllers
 
          
 
+        }
+
+
+        [HttpGet]
+        public JsonResult DetailsService(PostalCode obj)
+        {
+
+            List<DetailService> Addresses = new List<DetailService>();
+            int? Id = HttpContext.Session.GetInt32("userId");
+           
+            string postalcode = obj.postalcode;
+            Console.WriteLine(obj.postalcode);
+            var table = _db.UserAddresses.Where(x => x.UserId == Id && x.PostalCode == postalcode).ToList();
+            Console.WriteLine(table.ToString());
+
+            foreach (var add in table)
+            {
+                Console.WriteLine("1");
+                DetailService useradd = new DetailService();
+                useradd.AddressId = add.AddressId;
+                useradd.AddressLine1 = add.AddressLine1;
+                useradd.AddressLine2 = add.AddressLine2;
+                useradd.City = add.City;
+                useradd.PostalCode = add.PostalCode;
+                useradd.Mobile = add.Mobile;
+                useradd.isDefault = add.IsDefault;
+                Console.WriteLine(add.AddressLine1);
+                Addresses.Add(useradd);
+            }
+            Console.WriteLine("2");
+
+            return new JsonResult(Addresses);
         }
 
 

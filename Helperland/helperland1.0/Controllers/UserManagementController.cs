@@ -102,7 +102,7 @@ namespace helperland1._0.Controllers
                     user.IsRegisteredUser = true;
                     user.ModifiedBy = 123;
                     user.UserTypeId = 1;
-
+                    user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
                     _db.Users.Add(user);
                     _db.SaveChanges();
 
@@ -218,6 +218,7 @@ namespace helperland1._0.Controllers
         [HttpPost]
         public IActionResult ResetPassword(ResetPassword rp)
         {
+            rp.password = BCrypt.Net.BCrypt.HashPassword(rp.password);
             var user = new User() { UserId = rp.userId, Password = rp.password, ModifiedDate = DateTime.Now };
             _db.Users.Attach(user);
             _db.Entry(user).Property(x => x.Password).IsModified = true;
