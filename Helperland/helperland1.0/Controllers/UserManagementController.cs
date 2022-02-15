@@ -26,11 +26,41 @@ namespace helperland1._0.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_db.Users.Where(x => x.Email == user.username && x.Password == user.password).Count() > 0)
+
+                string password = _db.Users.FirstOrDefault(x => x.Email == user.username).Password;
+
+                bool pass = BCrypt.Net.BCrypt.Verify(user.password, password);
+                if (_db.Users.Where(x => x.Email == user.username && pass).Count() > 0)
                 {
 
-                    var U = _db.Users.FirstOrDefault(x => x.Email == user.username);
-                    HttpContext.Session.SetInt32("id", U.UserId);
+                     var U = _db.Users.FirstOrDefault(x => x.Email == user.username);
+
+                    Console.WriteLine("1");
+
+                    if (user.remember == true)
+                    {
+                        CookieOptions cookieRemember = new CookieOptions();
+                        cookieRemember.Expires = DateTime.Now.AddSeconds(604800);
+                        Response.Cookies.Append("userId", Convert.ToString(U.UserId), cookieRemember);
+                    }
+                   
+
+                    HttpContext.Session.SetInt32("userId", U.UserId);
+
+                 
+
+                    if (U.UserTypeId == 0)
+                    {
+                        return RedirectToAction("CustomerServiceHistory", "Customer");
+                    }
+                  /* else if (user.UserTypeId == 2)
+                    {
+                        return RedirectToAction("SPUpcomingService", "ServicePro");
+                    }
+                    else if (user.UserTypeId == 3)
+                    {
+                        return RedirectToAction("ServiceRequest", "Admin");
+                    }*/
 
                     return RedirectToAction("CustomerServiceHistory", "Customer");
                 }
@@ -115,6 +145,7 @@ namespace helperland1._0.Controllers
                     user.IsRegisteredUser = true;
                     user.ModifiedBy = 123;
                     user.UserTypeId = 0;
+                    user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
 
                     _db.Users.Add(user);
                     _db.SaveChanges();
@@ -167,7 +198,7 @@ namespace helperland1._0.Controllers
 
                 SmtpClient client = new SmtpClient();
                 client.Connect("smtp.gmail.com", 587, false);
-                client.Authenticate("", "");
+                client.Authenticate("vedantjotangiya@gmail.com", "Vedantjot@123");
                 client.Send(message);
                 client.Disconnect(true);
                 client.Dispose();

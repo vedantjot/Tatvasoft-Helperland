@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "vv6rUWLuyo1E37LON0ocBoe9NbkjWgd4u4FRpCa0AVf/CIVhgxVFueJ2c7pZxZ0vjFr2FpNHA8JgepGuJR+AAQ==",
+  "dgSpecHash": "tYYhruqiPXihgPK/9pXwj/120y9SFvGdKRao3Y0i+8Q3mYrKOlibT1+FHWVpKDMtoI6vfIfxcyC1Pcm188OyYw==",
   "success": true,
   "projectFilePath": "E:\\tatvasoft\\Tatvasoft-helperland\\Helperland\\Helperland1.0\\helperland1.0.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\vedan\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",
     "C:\\Users\\vedan\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\vedan\\.nuget\\packages\\mailkit\\3.1.1\\mailkit.3.1.1.nupkg.sha512",
     "C:\\Users\\vedan\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\2.2.0\\microsoft.aspnetcore.cryptography.internal.2.2.0.nupkg.sha512",

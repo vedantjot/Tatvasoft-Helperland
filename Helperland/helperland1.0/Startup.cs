@@ -56,7 +56,7 @@ namespace helperland1._0
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=UserManagement}/{action=CustomerSignUp}/{id?}");
+                    pattern: "{controller=Public}/{action=Index}/{id?}");
             });
         }
     }
