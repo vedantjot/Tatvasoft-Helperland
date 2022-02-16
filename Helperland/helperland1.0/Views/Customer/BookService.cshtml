@@ -38,13 +38,13 @@
 			<div class="col-lg-8 col-md-12 clearfix">
 
 				<div class="tab">
-					<button class="tablinks" onclick="set_service(event, 'setup_service')"  id="defaultOpen"><img
+					<button class="tablinks" onclick="set_service(event, 'at1')"  id="defaultOpen"><img
 							src="~/image/setup-service.png" alt=".."> Setup service</button>
-					<button class="tablinks" onclick="set_service(event, 'schedule')" id="form2Btn"><img src="~/image/schedule.png"
+					<button class="tablinks" onclick="set_service(event, 'at2')" id="form2Btn"><img src="~/image/schedule.png"
 							alt=".."> Schedule & Plan</button>
-					<button class="tablinks" onclick="set_service(event, 'your_details')" id="form3Btn"><img src="~/image/details.png"
+					<button class="tablinks" onclick="set_service(event, 'at3')" id="form3Btn"><img src="~/image/details.png"
 							alt=".."> Your Details</button>
-					<button class="tablinks" onclick="set_service(event, 'make_payment')" ><img
+					<button class="tablinks" onclick="set_service(event, 'at4')" id="form4Btn"><img
 							src="~/image/payment.png" alt=".."> Make Payment</button>
 				</div>
 
@@ -266,6 +266,20 @@
 
 		}
 
+		
+        function Disable(id){
+            document.getElementById(id).disabled= true;
+        }
+        function Clickable(id){
+            document.getElementById(id).disabled= false;
+        }
+
+
+
+        Disable('form2Btn');
+         Disable('form3Btn');
+          Disable('form4Btn');
+
 
 		 
 
@@ -286,7 +300,7 @@
                 data: data,
                 success: function (result) {
                     if (result.value == "true") {
-                        
+                        Clickable("form2Btn");
 						ClickFunction("form2Btn");
 						
                     }
@@ -323,6 +337,7 @@
                 data: data,
                 success: function (result) {
                     if (result.value == "true") {
+						Clickable("form3Btn");
                         ClickFunction("form3Btn");
 						loadAddress();
 

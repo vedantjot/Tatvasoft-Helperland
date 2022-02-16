@@ -1,5 +1,15 @@
 
 function set_service(evt, level) {
+
+    var ch = parseInt(level.charAt(2));
+
+    for (j = ch + 1; j <= 4; j++) {
+
+        document.getElementById("form" + j + "Btn").disabled = true;
+
+    }
+
+
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
