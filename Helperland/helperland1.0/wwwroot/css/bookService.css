@@ -130,6 +130,11 @@ h2 {
     margin-bottom: 10px;
 }
 
+#addNewaddressDiv {
+    display: none;
+    background-color: beige;
+}
+
 .make_payment h2 {
     font-size: 18px;
     font-weight: 700;

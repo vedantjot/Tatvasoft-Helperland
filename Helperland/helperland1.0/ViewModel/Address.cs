@@ -8,13 +8,20 @@ namespace helperland1._0.ViewModel
 
         public class Address
         {
-            public string Line1 { get; set; }
-            public string Line2 { get; set; }
-            public string City { get; set; }
-            public string State { get; set; }
-            public int PostalCode { get; set; }
-            public string Mobile { get; set; }
-            public string Email { get; set; }
-        }
+        public int AddressId { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string City { get; set; }
+
+        public string PostalCode { get; set; }
+
+        public string Mobile { get; set; }
+
+      
+
+       
+
+        public bool isDefault { get; set; }
+    }
     
 }

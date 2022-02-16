@@ -393,12 +393,12 @@ color: white;
 border-color:  #FF7B6D;
 }
 
-
-
+#addNewaddressDiv{
+    display: none;
+}
 
 /*footer*/
-
-.footer-container{
+.footer-container {
     background-color: black;
 }
 .footer-logo-col{

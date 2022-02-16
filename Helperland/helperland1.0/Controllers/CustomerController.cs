@@ -123,11 +123,22 @@ namespace helperland1._0.Controllers
 
 
         [HttpGet]
-        public JsonResult DetailsService(PostalCode obj)
+        public IActionResult DetailsService(PostalCode obj)
         {
 
-            List<DetailService> Addresses = new List<DetailService>();
-            int? Id = HttpContext.Session.GetInt32("userId");
+            int Id = -1;
+
+            List<Address> Addresses = new List<Address>();
+            if(HttpContext.Session.GetInt32("userId") != null)
+            {
+                Id = (int)HttpContext.Session.GetInt32("userId");
+            }
+            else if(Request.Cookies["userId"] != null)
+            {
+                Id = int.Parse(Request.Cookies["userId"]);
+             
+            }
+            
            
             string postalcode = obj.postalcode;
             Console.WriteLine(obj.postalcode);
@@ -137,7 +148,7 @@ namespace helperland1._0.Controllers
             foreach (var add in table)
             {
                 Console.WriteLine("1");
-                DetailService useradd = new DetailService();
+                Address useradd = new Address();
                 useradd.AddressId = add.AddressId;
                 useradd.AddressLine1 = add.AddressLine1;
                 useradd.AddressLine2 = add.AddressLine2;
@@ -145,7 +156,7 @@ namespace helperland1._0.Controllers
                 useradd.PostalCode = add.PostalCode;
                 useradd.Mobile = add.Mobile;
                 useradd.isDefault = add.IsDefault;
-                Console.WriteLine(add.AddressLine1);
+                
                 Addresses.Add(useradd);
             }
             Console.WriteLine("2");
@@ -153,6 +164,43 @@ namespace helperland1._0.Controllers
             return new JsonResult(Addresses);
         }
 
+
+        [HttpPost]
+        public ActionResult AddNewAddress(UserAddress useradd)
+        {
+            Console.WriteLine("Inside Addnew address 1");
+            int Id = -1;
+
+           
+            if (HttpContext.Session.GetInt32("userId") != null)
+            {
+                Id = (int)HttpContext.Session.GetInt32("userId");
+            }
+            else if (Request.Cookies["userId"] != null)
+            {
+                Id = int.Parse(Request.Cookies["userId"]);
+
+            }
+            Console.WriteLine("Inside Addnew address 2");
+            Console.WriteLine(Id);
+
+            useradd.UserId = Id;
+            useradd.IsDefault = false;
+            useradd.IsDeleted = false;
+            User user = _db.Users.Where(x => x.UserId == Id).FirstOrDefault();
+            useradd.Email = user.Email;
+            var result = _db.UserAddresses.Add(useradd);
+            Console.WriteLine("Inside Addnew address 3");
+            _db.SaveChanges();
+
+            Console.WriteLine("Inside Addnew address 4");
+            if (result != null)
+            {
+                return Ok(Json("true"));
+            }
+
+            return Ok(Json("false"));
+        }
 
     }
 }
