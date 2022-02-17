@@ -1,4 +1,7 @@
 ﻿@model helperland1._0.ViewModel.ScheduleService;
+@{
+String CurrentDate = DateTime.Now.ToString("yyyy-MM-dd");
+}
 
 <form id="form2" >
 				<div id="at2" class="tabcontent schedule">
@@ -9,10 +12,10 @@
 							<h2>when do you need cleaner?</h2>
 							<div class="row">
 								<div class="col-4">
-									<input type="date" asp-for="Date" class="form-control " placeholder="canlender" min={new Date().toISOString().split('T')[0]}>
+									<input type="date" asp-for="Date" class="form-control ForDate" placeholder="canlender" min=@CurrentDate>
 								</div>
 								<div class="col-4">
-									<select class="form-select" asp-for="Time"   aria-label="Default select example">
+									<select class="form-select ForTime" asp-for="Time"   aria-label="Default select example">
 										
 										<option selected value="08:00:00">8:00 </option>
 										<option value="08:30:00">8:30 </option>
@@ -43,7 +46,7 @@
 						<div class="col-6">
 							<h2>how longer do you need your cleaner to stay? </h2>
 							<div class="col-4">
-								<select class="form-select"  asp-for="Duration"  aria-label="Default select example">
+								<select class="form-select ForDuration"  asp-for="Duration"  aria-label="Default select example">
 									
 									 <option selected value="3">3.0 hrs</option>
 									<option value="3.5">3.5 hrs</option>

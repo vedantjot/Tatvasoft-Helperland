@@ -12,7 +12,7 @@
 @section Custom
 {
 <link rel="stylesheet" href="~/css/bookService.css" />
-<script src="~/js/bookService.js"></script>
+
 
 }
 
@@ -73,7 +73,7 @@
 						Payment Summary
 					</div>
 					<div class="card-body">
-						<p class="card-text">01/01/2018  4:00 pm <br> 1 bed, 1 bath.</p>
+						 <p class="card-text"> <span class="SIForDate"></span> <span class=" SIForTime " ></span> <br> 1 bed, 1 bath.</p>
 
 						<h3 class="card-text">
 							Duration
@@ -86,7 +86,7 @@
 							</div>
 							<div class="col">
 								<p class="card-text text-end">
-									3 Hrs
+									<span class="SIForDuration">  </span> Hrs
 								</p>
 							</div>
 						</div>
@@ -129,7 +129,7 @@
 							</div>
 							<div class="col">
 								<p class="card-text text-end price">
-									$ <span id="total_price">83</span>
+									$ <span id="total_price">75</span>
 								</p>
 							</div>
 						</div>
@@ -142,7 +142,7 @@
 							</div>
 							<div class="col">
 								<p class="card-text text-end price">
-									-$ <span id="discount">10</span>
+									-$ <span id="discount">0</span>
 								</p>
 							</div>
 						</div>
@@ -156,7 +156,7 @@
 							</div>
 							<div class="col">
 								<p class="card-text text-end total_price">
-									$ <span id="priceAfterDiscount">73</span>
+									$ <span id="priceAfterDiscount">75</span>
 								</p>
 							</div>
 						</div>
@@ -168,11 +168,11 @@
 							</div>
 							<div class="col">
 								<p class="card-text text-end effective_price">
-									$ <span id="priceAfterPromo">63</span>
+									$ <span id="priceAfterPromo">75</span>
 								</p>
 							</div>
 						</div>
-						<p class="card-text saving">*You will save $10 according to §35a EStG.</p>
+						<p class="card-text saving">*You will save $<span id="promo">0</span> according to §35a EStG.</p>
 					</div>
 					<div class="card-footer">
 						<img src="~/image/smiley.png" alt=".."> See what is always included
@@ -258,6 +258,7 @@
 
 
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	 <script src="~/js/bookService.js"></script>
 	<script>
 		document.getElementById("defaultOpen").click();
 
