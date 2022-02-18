@@ -82,21 +82,25 @@ namespace helperland1._0.Controllers
         [HttpPost]
         public IActionResult  ValidPostalCode(PostalCode obj)
         {
-            
-           
-            var list = _db.Users.Where(x => (x.ZipCode == obj.postalcode)&& (x.UserTypeId==1)).ToList();
-
-
-            if (list.Count() > 0)
+            if (ModelState.IsValid)
             {
-                
 
-              
+                var list = _db.Users.Where(x => (x.ZipCode == obj.postalcode) && (x.UserTypeId == 1)).ToList();
 
-                return Ok(Json("true"));
+
+                if (list.Count() > 0)
+                {
+
+
+                    return Ok(Json("true"));
+                }
+               // TempData["wrongZipCode"] = "Postal code you have entered is not valid.";
+                return Ok(Json("false"));
             }
-            TempData["wrongZipCode"] = "Postal code you have entered is not valid.";
-            return Ok(Json("false"));
+            else
+            {
+                return Ok(Json("Invalid"));
+            }
         }
 
         [HttpPost]
@@ -234,7 +238,7 @@ namespace helperland1._0.Controllers
             add.Comments = complete.Comments;
             add.PaymentDue = false;
             add.PaymentDone = true;
-            add.HasPets = complete.HasPet;
+            add.HasPets = complete.HasPets;
             add.CreatedDate = DateTime.Now;
             add.ModifiedDate = DateTime.Now;
             add.HasIssue = false;
@@ -265,27 +269,19 @@ namespace helperland1._0.Controllers
                 _db.ServiceRequestExtras.Add(srExtra);
                 _db.SaveChanges();
             }
-            if (complete.Oven == true)
-            {
-                ServiceRequestExtra srExtra = new ServiceRequestExtra();
-                srExtra.ServiceRequestId = result.Entity.ServiceRequestId;
-                srExtra.ServiceExtraId = 3;
-                _db.ServiceRequestExtras.Add(srExtra);
-                _db.SaveChanges();
-            }
-            if (complete.Window == true)
-            {
-                ServiceRequestExtra srExtra = new ServiceRequestExtra();
-                srExtra.ServiceRequestId = result.Entity.ServiceRequestId;
-                srExtra.ServiceExtraId = 5;
-                _db.ServiceRequestExtras.Add(srExtra);
-                _db.SaveChanges();
-            }
             if (complete.Fridge == true)
             {
                 ServiceRequestExtra srExtra = new ServiceRequestExtra();
                 srExtra.ServiceRequestId = result.Entity.ServiceRequestId;
                 srExtra.ServiceExtraId = 2;
+                _db.ServiceRequestExtras.Add(srExtra);
+                _db.SaveChanges();
+            }
+            if (complete.Oven == true)
+            {
+                ServiceRequestExtra srExtra = new ServiceRequestExtra();
+                srExtra.ServiceRequestId = result.Entity.ServiceRequestId;
+                srExtra.ServiceExtraId = 3;
                 _db.ServiceRequestExtras.Add(srExtra);
                 _db.SaveChanges();
             }
@@ -297,6 +293,16 @@ namespace helperland1._0.Controllers
                 _db.ServiceRequestExtras.Add(srExtra);
                 _db.SaveChanges();
             }
+            if (complete.Window == true)
+            {
+                ServiceRequestExtra srExtra = new ServiceRequestExtra();
+                srExtra.ServiceRequestId = result.Entity.ServiceRequestId;
+                srExtra.ServiceExtraId = 5;
+                _db.ServiceRequestExtras.Add(srExtra);
+                _db.SaveChanges();
+            }
+           
+           
 
             if (result != null && srAddrResult != null)
             {

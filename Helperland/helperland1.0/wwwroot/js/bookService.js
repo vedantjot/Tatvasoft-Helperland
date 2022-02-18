@@ -115,27 +115,20 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    //var currentDate = new Date(new Date().getTime() + 24  60  60 * 1000);
-    //var day = currentDate.getDate();
-    //var month = currentDate.getMonth() + 1;
-    //var year = currentDate.getFullYear();
-    //var tomorrow_date = day + "/" + month + "/" + year;
-    //document.querySelector('.SIForDate').innerHTML = tomorrow_date;
+   
 
-    //$(".ForDate").datepicker({
-    //    dateFormat: "dd/mm/yy",
-    //    minDate: "+1d",
-
-    //});
-
+    selected = $(".ForDate").val();
+    document.querySelector('.SIForDate').innerHTML = selected;
 
 
     $(".ForDate").on("change", function () {
         selected = $(this).val();
 
         document.querySelector('.SIForDate').innerHTML = selected;
-        //alert(selected);
+
     });
+
+   
 });
 
 

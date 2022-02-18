@@ -19,7 +19,7 @@ namespace helperland1._0.ViewModel
 
             public float TotalCost { get; set; }
             public string Comments { get; set; }
-            public bool HasPet { get; set; }
+            public bool HasPets { get; set; }
             public bool Cabinet { get; set; }
             public bool Window { get; set; }
             public bool Laundry { get; set; }

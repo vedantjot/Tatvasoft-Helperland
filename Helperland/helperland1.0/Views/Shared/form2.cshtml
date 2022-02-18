@@ -1,6 +1,6 @@
 ﻿@model helperland1._0.ViewModel.ScheduleService;
 @{
-String CurrentDate = DateTime.Now.ToString("yyyy-MM-dd");
+String CurrentDate = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
 }
 
 <form id="form2" >
@@ -12,7 +12,7 @@ String CurrentDate = DateTime.Now.ToString("yyyy-MM-dd");
 							<h2>when do you need cleaner?</h2>
 							<div class="row">
 								<div class="col-4">
-									<input type="date" asp-for="Date" class="form-control ForDate" placeholder="canlender" min=@CurrentDate>
+									<input type="date" value=@CurrentDate asp-for="Date" class="form-control ForDate" placeholder="canlender" min=@CurrentDate>
 								</div>
 								<div class="col-4">
 									<select class="form-select ForTime" asp-for="Time"   aria-label="Default select example">

@@ -305,9 +305,12 @@
 						ClickFunction("form2Btn");
 						
                     }
-                    else {
-                        alert("zipcode is not valid");
+                    else if(result.value=="false") {
+                        alert("No service avaliable ");
                     }
+					else{
+						 alert("Invalid Postal code");
+					}
                 },
                 error: function () {
                     alert('Failed to receive the Data');
@@ -519,11 +522,11 @@ function completeBookService() {
    data.subTotal= (extra + duration)*25;
     data.totalCost =  data.subTotal; //Discount 0(out of scope)
     data.comments = document.getElementById("comments").value;
-    data.paymentDue = false;
-    data.HasPets = document.getElementById("flexCheckDefault").value;
+   
+    data.HasPets = document.getElementById("flexCheckDefault").checked;
 	alert(document.getElementById("flexCheckDefault").checked);
 	
-    data.paymentDone = true;
+
 
     //data.addressId = $('#addresses div input[type=radio]:checked').val();
 	data.addressId=document.querySelector('input[name="address"]:checked').value;
