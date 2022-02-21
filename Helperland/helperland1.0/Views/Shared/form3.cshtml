@@ -1,4 +1,4 @@
-﻿@model helperland1._0.ViewModel.Address;	
+﻿@model helperland1._0.Models.UserAddress;	
 <form id="form3">
 		   <div id="at3" class="tabcontent">
                      
@@ -22,24 +22,24 @@
 
                 <div id="addNewaddressDiv" class="container-fluid">
 
-                    <form action="" class="address_form">
+                    <form   asp-action="" asp-controller="Customer" class="address_form">
                         <div class="row mb-3">
                             <div class="col-md-6 col-sm-12">
                                 <label for="streetname" class="form-label">Street name</label>
-                                <input asp-for="AddressLine1"     type="text" class="form-control" name="streetname" placeholder="Street name"  />
-                                 <span asp-validation-for="AddressLine1" class="formwarning"></span>
+                                <input asp-for="AddressLine1"     type="text" class="form-control street" name="streetname" placeholder="Street name"  />
+                                 <div class="street-msg"></div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <label for="housenumber" class="form-label">House number</label>
-                                <input  asp-for="AddressLine2"  type="text" class="form-control" name="housenumber" placeholder="House number" />
-                                 <span asp-validation-for="AddressLine2" class="formwarning"></span>
+                                <input  asp-for="AddressLine2"  type="text" class="form-control houseno " name="housenumber" placeholder="House number" />
+                                 <div class="houseno-msg"></div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6 col-sm-12">
                                 <label for="postalcode" class="form-label">Postal Code</label>
                                 <input  asp-for="PostalCode"  id="addAddressPostalCode" type="text" class="form-control" name="postalcode" placeholder="Postal Code" />
-                                 <span asp-validation-for="PostalCode" class="formwarning"></span>
+                                 
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <label for="city" class="form-label">City</label>
@@ -52,14 +52,14 @@
                                 <label for="phonenumber" class="form-label">Phone number</label>
                                 <div class="input-group">
                                     <div class="input-group-text">+49</div>
-                                    <input  asp-for="Mobile"  type="number" class="form-control" name="phonenumber" placeholder="Mobile Number" />
-                                     <span asp-validation-for="Mobile" class="formwarning"></span>
+                                    <input  asp-for="Mobile"  type="text" maxlength="10" class="form-control mobile" name="phonenumber" placeholder="Mobile Number" />
+                                     <div class="mobile-msg"></div>
                                 </div>
                             </div>
                         </div>
 
                         <div>
-                            <button type="button" class="btn save" onclick='saveAddress()'>Save</button>
+                            <button id="addAddressSubmit" type="button" class="btn save" onclick='saveAddress()'>Save</button>
                             <button id="addressCancelBtn" type="reset" class="btn cancel" onclick='cancelAddress()'>Cancel</button>
                         </div>
                     </form>

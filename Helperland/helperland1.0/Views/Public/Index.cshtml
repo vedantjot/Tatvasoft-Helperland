@@ -48,7 +48,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav home-navbar-nav ms-auto">
 
-            <a class="nav-link home-nav-link nav-link-book-a-cleaner" href="#">Book a Cleaner</a>
+            <a class="nav-link home-nav-link nav-link-book-a-cleaner" asp-controller="Customer" asp-action="BookService">Book a Cleaner</a>
             <a class=" nav-link home-nav-link " asp-controller="Public" asp-action="Price"> Prices</a>
             <a class="nav-link home-nav-link ">Our Guarantee</a>
             <a class="nav-link home-nav-link ">Blog</a>
@@ -89,7 +89,7 @@
     <div class="row">
       <div class="col text-center">
 
-        <button class="header-book-button">Let’s Book a Cleaner</button>
+       <a asp-controller="Customer" asp-action="BookService"><button class="header-book-button" >Let’s Book a Cleaner</button></a>
       </div>
     </div>
 

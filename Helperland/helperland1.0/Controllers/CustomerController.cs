@@ -75,7 +75,10 @@ namespace helperland1._0.Controllers
                     return PartialView();
                 }
             }
-            return RedirectToAction("Index", "Public");
+            TempData["add"] = "alert show";
+            TempData["fail"] = "Please Login to book service";
+            return RedirectToAction("Index", "Public", new { loginFail = "true" });
+
 
         }
 
@@ -170,40 +173,48 @@ namespace helperland1._0.Controllers
 
 
         [HttpPost]
-        public ActionResult AddNewAddress(UserAddress useradd)
+        public IActionResult AddNewAddress(UserAddress useradd)
         {
-            Console.WriteLine("Inside Addnew address 1");
-            int Id = -1;
 
-           
-            if (HttpContext.Session.GetInt32("userId") != null)
+            if (ModelState.IsValid)
             {
-                Id = (int)HttpContext.Session.GetInt32("userId");
-            }
-            else if (Request.Cookies["userId"] != null)
-            {
-                Id = int.Parse(Request.Cookies["userId"]);
+
+
+                Console.WriteLine("Inside Addnew address 1");
+                int Id = -1;
+
+
+                if (HttpContext.Session.GetInt32("userId") != null)
+                {
+                    Id = (int)HttpContext.Session.GetInt32("userId");
+                }
+                else if (Request.Cookies["userId"] != null)
+                {
+                    Id = int.Parse(Request.Cookies["userId"]);
+
+                }
+                Console.WriteLine("Inside Addnew address 2");
+                Console.WriteLine(Id);
+
+                useradd.UserId = Id;
+                useradd.IsDefault = false;
+                useradd.IsDeleted = false;
+                User user = _db.Users.Where(x => x.UserId == Id).FirstOrDefault();
+                useradd.Email = user.Email;
+                var result = _db.UserAddresses.Add(useradd);
+                Console.WriteLine("Inside Addnew address 3");
+                _db.SaveChanges();
+
+                Console.WriteLine("Inside Addnew address 4");
+                if (result != null)
+                {
+                    return Ok(Json("true"));
+                }
+
+                return Ok(Json("false"));
 
             }
-            Console.WriteLine("Inside Addnew address 2");
-            Console.WriteLine(Id);
-
-            useradd.UserId = Id;
-            useradd.IsDefault = false;
-            useradd.IsDeleted = false;
-            User user = _db.Users.Where(x => x.UserId == Id).FirstOrDefault();
-            useradd.Email = user.Email;
-            var result = _db.UserAddresses.Add(useradd);
-            Console.WriteLine("Inside Addnew address 3");
-            _db.SaveChanges();
-
-            Console.WriteLine("Inside Addnew address 4");
-            if (result != null)
-            {
-                return Ok(Json("true"));
-            }
-
-            return Ok(Json("false"));
+            return View();
         }
 
 
