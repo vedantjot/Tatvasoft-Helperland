@@ -1,8 +1,13 @@
-﻿
+﻿@model helperland1._0.Models.ContactU
+
+
+@section Custom
+{
+ <link rel="stylesheet" href="~/css/style.css">
 
 
 
-
+}
   
 
 
@@ -83,13 +88,15 @@
   <div class="container-fluid  contact-form-container">
 
 
-    <form>
+    <form asp-action="Contactus" asp-controller="Public" enctype="multipart/form-data">
       <div class="row">
         <div class=" col-sm-6">
-          <input type="text" class="form-control" placeholder="First name">
+          <input asp-for="Name" type="text"  class="form-control" placeholder="First name">
+           <span asp-validation-for="Name" class="formwarning"></span>
         </div>
         <div class=" col-sm-6">
-          <input type="text" class="form-control" placeholder="Last name">
+          <input asp-for="LastName" type="text" class="form-control" placeholder="Last name">
+           <span asp-validation-for="LastName" class="formwarning"></span>
         </div>
       </div>
       <br>
@@ -101,27 +108,35 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">+45</span>
             </div>
-            <input type="text" class="form-control" placeholder="Mobile number">
+            <input asp-for="PhoneNumber" type="text" class="form-control" placeholder="Mobile number">
+             <span asp-validation-for="PhoneNumber" class="formwarning"></span>
           </div>
 
         </div>
         <div class="col-sm-6">
-          <input type="text" class="form-control" placeholder="Email address">
+          <input asp-for="Email" type="text" class="form-control" placeholder="Email address">
+           <span asp-validation-for="Email" class="formwarning"></span>
         </div>
       </div>
 
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Subject</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select asp-for="Subject" class="form-select" aria-label="Default select example">
+        <option value="General" selected >General</option>
+        <option value="Inquiry"> Inquiry</option>
+        <option value="Renewal">Renewal</option>
+        <option value="Revocation">Revocation</option>
+
+       
+        
       </select>
      <br>
 
       <div class="form-group">
        
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  placeholder="Message"></textarea>
+        <textarea asp-for="Message" class="form-control" id="exampleFormControlTextarea1" rows="3"  placeholder="Message"></textarea>
       </div>
+      <br />
+      
+      <input  class="form-control" type="file" asp-for="Attach">
       <br />
        <Button type="submit" class="nav-link faq-nav-link  faq-nav-link-border mx-auto" style="padding: 1% 20% 1% 20%">Submit</Button>
 
@@ -148,8 +163,6 @@
   
 
 </div>
-
-
 
 
 

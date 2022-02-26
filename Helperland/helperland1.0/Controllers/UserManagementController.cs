@@ -51,7 +51,7 @@ namespace helperland1._0.Controllers
 
                     if (U.UserTypeId == 0)
                     {
-                        return RedirectToAction("CustomerServiceHistory", "Customer");
+                        return RedirectToAction("CustomerDashboard", "Customer");
                     }
                   /* else if (user.UserTypeId == 2)
                     {
@@ -62,7 +62,7 @@ namespace helperland1._0.Controllers
                         return RedirectToAction("ServiceRequest", "Admin");
                     }*/
 
-                    return RedirectToAction("CustomerServiceHistory", "Customer");
+                    return RedirectToAction("CustomerDashboard", "Customer");
                 }
                 else
                 {
@@ -227,6 +227,14 @@ namespace helperland1._0.Controllers
 
 
             return RedirectToAction("Index", "Public", new { loginModal = "true" });
+        }
+
+        public IActionResult logout()
+        {
+            HttpContext.Session.Clear();
+
+            Response.Cookies.Delete("userId");
+            return RedirectToAction("Index", "Public", new { logoutModal = "true" });
         }
 
     }

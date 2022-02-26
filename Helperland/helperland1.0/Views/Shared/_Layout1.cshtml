@@ -12,11 +12,12 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!--Custome Css-->
-   @{ if(@ViewBag.title!="bookservice")
-    {
-    <link rel="stylesheet" href="~/css/style.css">
-    }}
+   
     @RenderSection("Custom",required:false)
+
+
+    <link rel="stylesheet" href="~/css/navbar.css">
+
 
     <!--JS-->
     <script src="~/js/faq.js"></script>
@@ -30,45 +31,43 @@
 <body>
 
     <!--nav bar-->
-
-
-
-    <nav class="navbar faq-navbar navbar-expand-md navbar-dark">
+    @* <nav class="navbar faq-navbar navbar-expand-md navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand faq-navbar-brand" href="#">
-                <img src="~/image/logo-small.png" alt="logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav faq-navbar-nav ms-auto">
+        <a class="navbar-brand faq-navbar-brand" href="#">
+        <img src="~/image/logo-small.png" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav faq-navbar-nav ms-auto">
 
-                    <a class="nav-link faq-nav-link faq-nav-link-border" asp-controller="Customer" asp-action="BookService">Book now</a>
-                    <a class=" nav-link faq-nav-link  faq-nav-link-border" asp-controller="Public" asp-action="price">Prices & services</a>
-                    <a class="nav-link faq-nav-link  ">Warrenty</a>
-                    <a class="nav-link faq-nav-link ">Blog</a>
-                    <a class=" nav-link faq-nav-link " asp-controller="Public" asp-action="contactus">Contact</a>
-                    <a class="nav-link faq-nav-link  faq-nav-link-border"  asp-controller="Public" asp-action="Index" asp-route-loginModal="true">Login</a>
-                    <a class="nav-link faq-nav-link  faq-nav-link-border" asp-controller="UserManagement" asp-action="BecomeAProvider">Become a Helper</a>
-                    <a class="nav-link faq-nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="image\ic-flag.png">
-                    </a>
-                </div>
-            </div>
+        <a class="nav-link faq-nav-link faq-nav-link-border" asp-controller="Customer" asp-action="BookService">Book now</a>
+        <a class=" nav-link faq-nav-link  faq-nav-link-border" asp-controller="Public" asp-action="price">Prices & services</a>
+        <a class="nav-link faq-nav-link  ">Warrenty</a>
+        <a class="nav-link faq-nav-link ">Blog</a>
+        <a class=" nav-link faq-nav-link " asp-controller="Public" asp-action="contactus">Contact</a>
+        <a class="nav-link faq-nav-link  faq-nav-link-border"  asp-controller="Public" asp-action="Index" asp-route-loginModal="true">Login</a>
+        <a class="nav-link faq-nav-link  faq-nav-link-border" asp-controller="UserManagement" asp-action="BecomeAProvider">Become a Helper</a>
+        <a class="nav-link faq-nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+        data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="image\ic-flag.png">
+        </a>
         </div>
-    </nav>
+        </div>
+        </div>
+        </nav>*@
+    @await Html.PartialAsync("navbar")
 
-   
+
     @RenderBody()
 
     <!--footer starts-->
 
 
 
-    <div class="row contact-row">
+   @** <div class="row contact-row">
 
 
         <div class="col contact-col-email">
@@ -93,7 +92,22 @@
 
 
 
-    </div>
+    </div>*@
+
+    <section class="our-news-letter">
+		<div class="container text-center">
+			<h2>GET OUR NEWSLETTER</h2>
+			<div class="form-row d-flex justify-content-center align-items-center">
+				<div class="form-group">
+					<label for="email" style="display: none;">YOUR EMAIL</label>
+					<input type="text" placeholder="YOUR EMAIL" id="email" class="form-control">
+				</div>
+				<div class="btn-wrapper">
+					<button class="submit">Submit</button>
+				</div>
+			</div>
+		</div>
+	</section>
 
     <div class="container-fluid footer-container">
         <div class="row">
