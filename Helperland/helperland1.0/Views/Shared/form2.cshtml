@@ -12,7 +12,7 @@ String CurrentDate = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
 							<h2>when do you need cleaner?</h2>
 							<div class="row">
 								<div class="col-4">
-									<input type="date" value=@CurrentDate asp-for="Date" class="form-control ForDate" placeholder="canlender" min=@CurrentDate>
+									<input style="font-size: 10px" type="date" value=@CurrentDate asp-for="Date" class="form-control ForDate" placeholder="canlender" min=@CurrentDate>
 								</div>
 								<div class="col-4">
 									<select class="form-select ForTime" asp-for="Time"   aria-label="Default select example">
