@@ -1,0 +1,1 @@
+﻿For User 0= Customer1= ServiceProvider2= AdminFor Service Status case 1:newcase 2:pendingcase 3:completedcase 4:cancelleduser profile url to db :  image name in db  cap.png

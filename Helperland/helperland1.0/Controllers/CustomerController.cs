@@ -511,6 +511,7 @@ namespace helperland1._0.Controllers
             add.CreatedDate = DateTime.Now;
             add.ModifiedDate = DateTime.Now;
             add.HasIssue = false;
+            add.Status = 1;
 
             var result = _db.ServiceRequests.Add(add);
             _db.SaveChanges();
