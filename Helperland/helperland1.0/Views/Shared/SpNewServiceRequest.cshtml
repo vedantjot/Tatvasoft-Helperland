@@ -1,0 +1,84 @@
+﻿@model IEnumerable<helperland1._0.ViewModel.SPDashboard>;
+
+
+
+<div id="NewServiceRequest" class="tab-contant">
+
+    <div class="clearfix">
+        <div class="d-flex justify-content-between">
+            <p class="alignleft "> Customer Service Request </p>
+
+            <a asp-controller="Customer" asp-action="BookService"> <button class="alignright ">Add new request</button></a>
+
+        </div>
+
+
+
+        <table id="SPServiceRequestTable" class="table">
+
+
+            <thead class="table-light">
+                <tr class="text-center">
+                    <th scope="col"> Service ID</th>
+                    <th scope="col"> Service Date</th>
+                    <th scope="col"> Customer Details</th>
+                    <th scope="col"> Payment</th>
+                    <th scope="col"> Time Conflict</th>
+                    <th scope="col"> Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model.Count() > 0)
+                {
+                    @foreach (var item in Model)
+                    {
+
+                        <tr data-value=@item.ServiceRequestId>
+                            <td data-label="Service ID">@item.ServiceRequestId</td>
+                            <td data-label="Service Date">
+
+                                <div>
+                                    <span><img src="/image/calendar2.png" alt=""></span>
+                                    <span class="upcoming-date"><b>@item.Date</b></span>
+                                </div>
+                                <div>
+                                    <span><img src="/image/timer.png" alt=""></span>
+                                    <span>@item.StartTime - @item.EndTime</span>
+                                </div>
+                            </td>
+                            <td data-lable="Customer Details">
+                                <div>@item.CustomerName</div>
+                                <div><span><img src="/image/home.png" alt=""></span> <span >@item.Address</span> </div>
+                            </td>
+                            <td data-lable="Payment">
+                                <span>@item.TotalCost</span> &euro;
+                            </td>
+                            <td data-lable="Time Conflict"> 
+                                <a>Fuck</a>
+                            </td>
+                            <td data-lable="Actions">
+                                <a>Accept</a>
+                            </td>
+
+                        </tr>
+
+
+                    }
+                }
+
+
+
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+
+
+</div>
+
+
+

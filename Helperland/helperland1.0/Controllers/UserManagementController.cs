@@ -34,30 +34,52 @@ namespace helperland1._0.Controllers
                 {
 
                      var U = _db.Users.FirstOrDefault(x => x.Email == user.username);
+                    ViewBag.Name = null;
+                    
 
-                    Console.WriteLine("1");
-
-                    if (user.remember == true)
-                    {
-                        CookieOptions cookieRemember = new CookieOptions();
-                        cookieRemember.Expires = DateTime.Now.AddSeconds(604800);
-                        Response.Cookies.Append("userId", Convert.ToString(U.UserId), cookieRemember);
-                    }
                    
-
-                    HttpContext.Session.SetInt32("userId", U.UserId);
 
                  
 
                     if (U.UserTypeId == 0)
                     {
+                        if (user.remember == true)
+                        {
+                            CookieOptions cookieRemember = new CookieOptions();
+                            cookieRemember.Expires = DateTime.Now.AddSeconds(604800);
+                            Response.Cookies.Append("userId", Convert.ToString(U.UserId), cookieRemember);
+                        }
+
+
+                        HttpContext.Session.SetInt32("userId", U.UserId);
+
+
                         return RedirectToAction("CustomerDashboard", "Customer");
                     }
-                  /* else if (user.UserTypeId == 2)
+                   else if (U.UserTypeId == 1 )
                     {
-                        return RedirectToAction("SPUpcomingService", "ServicePro");
+                        if(U.IsApproved==false)
+                        {
+                            ViewBag.Name = null;
+                            TempData["add"] = "alert show";
+                            TempData["fail"] = "You are not approved by admin, please contact admin.";
+                            return RedirectToAction("Index", "Public", new { loginModal = "true" });
+                        }
+
+                        if (user.remember == true)
+                        {
+                            CookieOptions cookieRemember = new CookieOptions();
+                            cookieRemember.Expires = DateTime.Now.AddSeconds(604800);
+                            Response.Cookies.Append("userId", Convert.ToString(U.UserId), cookieRemember);
+                        }
+
+
+                        HttpContext.Session.SetInt32("userId", U.UserId);
+
+
+                        return RedirectToAction("SPServiceRequest", "Serviceprovider");
                     }
-                    else if (user.UserTypeId == 3)
+                   /* else if (user.UserTypeId == 3)
                     {
                         return RedirectToAction("ServiceRequest", "Admin");
                     }*/

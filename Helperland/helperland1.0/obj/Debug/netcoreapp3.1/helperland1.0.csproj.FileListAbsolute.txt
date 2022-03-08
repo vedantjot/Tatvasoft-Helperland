@@ -404,3 +404,9 @@ E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3
 E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Shared\CustomerDashboardPartial.cshtml.g.cs
 E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Shared\CustomerServiceHistoryPartial.cshtml.g.cs
 E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Shared\CustomerSettingPartial.cshtml.g.cs
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Shared\SpBlockCustomer.cshtml.g.cs
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Shared\SpMyRating.cshtml.g.cs
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Shared\SpNewServiceRequest.cshtml.g.cs
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Shared\SpServiceHistory.cshtml.g.cs
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Shared\SpUpcomingService.cshtml.g.cs
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\ServiceProvider\SPServiceRequest.cshtml.g.cs

@@ -23,23 +23,21 @@
     <link rel="stylesheet" href="~/css/style.css" />
     <style>
         div.notification {
-    border-right: 1px solid #e1e1e1;
-    border-left: 1px solid #e1e1e1;
-    padding: 5px 25px 0 16px;
-    max-width: 70px;
-     }
+            border-right: 1px solid #e1e1e1;
+            border-left: 1px solid #e1e1e1;
+            padding: 5px 25px 0 16px;
+            max-width: 70px;
+        }
 
-    div.notification span {
-        background-color: #ff1616;
-        top: -7px;
-        right: 11px;
-    }
-    .dropdown{
-    border: none;
-    }
+            div.notification span {
+                background-color: #ff1616;
+                top: -7px;
+                right: 11px;
+            }
 
-  
-
+        .dropdown {
+            border: none;
+        }
 
     </style>
 
@@ -85,8 +83,18 @@
                                 <br />
                                 <span id="UsernameNav">@ViewBag.Name</span>
                             </li>
-                            <li><a asp-action="CustomerDashboard" asp-controller="Customer" class="dropdown-item">My Dashbord</a></li>
-                            <li><a class="dropdown-item" asp-controller="Customer" asp-action="CustomerDashboard" asp-route-Tablinks="SettingsTabBtn">My Setting</a></li>
+                            @if (ViewBag.UserType == 0)
+                            {
+                                <li><a asp-controller="Customer" asp-action="CustomerDashboard" class="dropdown-item">My Dashbord</a></li>
+                                <li><a class="dropdown-item" asp-controller="Customer" asp-action="CustomerDashboard" asp-route-Tablinks="SettingsTabBtn">My Setting</a></li>
+
+                            }
+                            @if (ViewBag.UserType == 1)
+                            {
+                                <li><a asp-controller="ServiceProvider" asp-action="SPServiceRequest" class="dropdown-item">My Dashbord</a></li>
+                                <li><a class="dropdown-item" asp-controller="ServiceProvider" asp-action="SPServiceRequest" asp-route-Tablinks="SettingsTabBtn">My Setting</a></li>
+
+                            }
                             <li><a class="dropdown-item" asp-controller="UserManagement" asp-action="Logout">Logout</a></li>
                         </ul>
                     </div>
@@ -114,7 +122,7 @@
                                 <img src="~/image/flag.png">
                             </a>
                         }
-                                <a class="dropdown-item d-none" id="logoutBtn"  data-bs-toggle="modal" data-bs-target="#logoutModel">Logout</a>
+                        <a class="dropdown-item d-none" id="logoutBtn" data-bs-toggle="modal" data-bs-target="#logoutModel">Logout</a>
 
 
 
@@ -683,7 +691,7 @@
         }
         if (url == "logoutModal=true") {
            document.getElementById("logoutBtn").click();
-           
+
         }
     </script>
 
