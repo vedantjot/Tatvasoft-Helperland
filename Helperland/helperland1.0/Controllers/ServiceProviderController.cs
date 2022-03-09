@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace helperland1._0.Controllers
 {
     public class ServiceProviderController : Controller
@@ -122,6 +123,80 @@ namespace helperland1._0.Controllers
 
 
 
+
+        }
+
+
+
+        public int CheckConflict()
+        {
+
+            int? Id = HttpContext.Session.GetInt32("userId");
+            if (Id == null)
+            {
+                Id = Convert.ToInt32(Request.Cookies["userId"]);
+            }
+
+            int SRID = 21;
+
+            ServiceRequest request = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == SRID);
+
+            String reqdate = request.ServiceStartDate.ToString("yyyy-MM-dd");
+            Console.WriteLine(reqdate);
+
+            String startDateStr= reqdate+" 00:00:00.000";
+            String endDateStr = reqdate + " 23:59:59.999";
+
+            Console.WriteLine(startDateStr);
+
+            DateTime startDate = DateTime.ParseExact(startDateStr, "yyyy-MM-dd HH:mm:ss.fff",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+
+            DateTime endDate = DateTime.ParseExact(endDateStr, "yyyy-MM-dd HH:mm:ss.fff",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+
+            List < ServiceRequest > list = _db.ServiceRequests.Where(x => (x.ServiceProviderId == Id) && (x.Status==2) && (x.ServiceStartDate > startDate && x.ServiceStartDate < endDate) ).ToList();
+
+            double mins = ((double)(request.ServiceHours + request.ExtraHours)) * 60;
+            DateTime endTimeRequest = request.ServiceStartDate.AddMinutes(mins+60);
+
+            request.ServiceStartDate = request.ServiceStartDate.AddMinutes(60);
+
+            foreach (ServiceRequest booked in list)
+            {
+                mins = ((double)(booked.ServiceHours + booked.ExtraHours)) * 60;
+                DateTime endTimeBooked = booked.ServiceStartDate.AddMinutes(mins);
+
+                if(request.ServiceStartDate<booked.ServiceStartDate)
+                {
+                    if(endTimeRequest<booked.ServiceStartDate)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return booked.ServiceRequestId;
+                    }
+                }
+                else
+                {
+                    if(request.ServiceStartDate<endTimeBooked)
+                    {
+                        return booked.ServiceRequestId;
+                    }
+                }
+
+            }
+
+            //String result = "";
+            //foreach(var temp in list)
+            //{
+            //    result = result + " " + temp.ServiceRequestId;
+
+            //}
+            //Console.WriteLine(result);
+
+            return -1;
 
         }
     }
