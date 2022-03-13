@@ -52,65 +52,75 @@ namespace helperland1._0.Controllers
 
             var ServiceRequest = _db.ServiceRequests.Where(x => x.ZipCode == user.ZipCode && x.Status == 1).ToList();
 
+            var BlockedCustomer = _db.FavoriteAndBlockeds.Where(x=> x.UserId==Id && x.IsBlocked==true).Select(x => x.TargetUserId).ToList();
+
+            Console.WriteLine(BlockedCustomer.ToString());
+
             if (ServiceRequest.Any())
             {
                 foreach (var req in ServiceRequest)
                 {
-                    SPDashboard temp = new SPDashboard();
-
-
-                    temp.ServiceRequestId = req.ServiceRequestId;
-                    var StartDate = req.ServiceStartDate.ToString();
-                    //temp.Date = StartDate.Substring(0, 10);
-                    //temp.StartTime = StartDate.Substring(11);
-                    temp.Date = req.ServiceStartDate.ToString("dd/MM/yyyy");
-                    temp.StartTime = req.ServiceStartDate.AddHours(0).ToString("HH:mm ");
-                    var totaltime = (double)(req.ServiceHours + req.ExtraHours);
-                    temp.EndTime = req.ServiceStartDate.AddHours(totaltime).ToString("HH:mm ");
-                    temp.Status = (int)req.Status;
-                    temp.TotalCost = req.TotalCost;
-                    temp.HasPet = req.HasPets;
-                    temp.Comments = req.Comments;
-
-
-                    User customer = _db.Users.FirstOrDefault(x => x.UserId == req.UserId);
-                    temp.CustomerName=customer.FirstName+" "+customer.LastName;
-
-                    ServiceRequestAddress Address = (ServiceRequestAddress)_db.ServiceRequestAddresses.FirstOrDefault(x => x.ServiceRequestId == req.ServiceRequestId);
-
-                    temp.Address = Address.AddressLine1 + ", " + Address.AddressLine2 + ", " + Address.City + " - " + Address.PostalCode;
-
-                    List<ServiceRequestExtra> SRExtra = _db.ServiceRequestExtras.Where(x => x.ServiceRequestId == req.ServiceRequestId).ToList();
-
-                    foreach (ServiceRequestExtra row in SRExtra)
+                    if (!BlockedCustomer.Contains(req.UserId))
                     {
-                        if (row.ServiceExtraId == 1)
+                        SPDashboard temp = new SPDashboard();
+
+
+                        temp.ServiceRequestId = req.ServiceRequestId;
+                        var StartDate = req.ServiceStartDate.ToString();
+                        //temp.Date = StartDate.Substring(0, 10);
+                        //temp.StartTime = StartDate.Substring(11);
+                        temp.Date = req.ServiceStartDate.ToString("dd/MM/yyyy");
+                        temp.StartTime = req.ServiceStartDate.AddHours(0).ToString("HH:mm ");
+                        var totaltime = (double)(req.ServiceHours + req.ExtraHours);
+                        temp.EndTime = req.ServiceStartDate.AddHours(totaltime).ToString("HH:mm ");
+                        temp.Status = (int)req.Status;
+                        temp.TotalCost = req.TotalCost;
+                        temp.HasPet = req.HasPets;
+                        temp.Comments = req.Comments;
+
+
+                        User customer = _db.Users.FirstOrDefault(x => x.UserId == req.UserId);
+                        temp.CustomerName = customer.FirstName + " " + customer.LastName;
+
+                        ServiceRequestAddress Address = (ServiceRequestAddress)_db.ServiceRequestAddresses.FirstOrDefault(x => x.ServiceRequestId == req.ServiceRequestId);
+
+                        temp.Address = Address.AddressLine1 + ", " + Address.AddressLine2 + ", " + Address.City + " - " + Address.PostalCode;
+
+                        List<ServiceRequestExtra> SRExtra = _db.ServiceRequestExtras.Where(x => x.ServiceRequestId == req.ServiceRequestId).ToList();
+
+                        foreach (ServiceRequestExtra row in SRExtra)
                         {
-                            temp.Cabinet = true;
+                            if (row.ServiceExtraId == 1)
+                            {
+                                temp.Cabinet = true;
+                            }
+                            else if (row.ServiceExtraId == 2)
+                            {
+                                temp.Oven = true;
+                            }
+                            else if (row.ServiceExtraId == 3)
+                            {
+                                temp.Window = true;
+                            }
+                            else if (row.ServiceExtraId == 4)
+                            {
+                                temp.Fridge = true;
+                            }
+                            else
+                            {
+                                temp.Laundry = true;
+                            }
                         }
-                        else if (row.ServiceExtraId == 2)
-                        {
-                            temp.Oven = true;
-                        }
-                        else if (row.ServiceExtraId == 3)
-                        {
-                            temp.Window = true;
-                        }
-                        else if (row.ServiceExtraId == 4)
-                        {
-                            temp.Fridge = true;
-                        }
-                        else
-                        {
-                            temp.Laundry = true;
-                        }
+
+
+
+                        dashboardTable.Add(temp);
+
+
+
+
+
                     }
-
-                    
-
-                    dashboardTable.Add(temp);
-
-
 
 
 
@@ -423,6 +433,102 @@ namespace helperland1._0.Controllers
 
 
             
+
+        }
+
+
+
+
+
+
+
+        public JsonResult getCustomer()
+        {
+
+            int? Id = HttpContext.Session.GetInt32("userId");
+            if (Id == null)
+            {
+                Id = Convert.ToInt32(Request.Cookies["userId"]);
+            }
+
+            List<int> customerID = _db.ServiceRequests.Where(x => x.ServiceProviderId == Id && x.Status!=1).Select(u=> u.UserId).ToList();
+
+
+            var CustomerSetId= new HashSet<int>(customerID);
+
+            List<BlockCustomerData> blockData = new List<BlockCustomerData>();
+
+            foreach(int temp in CustomerSetId)
+            {
+                User user= _db.Users.FirstOrDefault(x=> x.UserId == temp);
+                FavoriteAndBlocked FB = _db.FavoriteAndBlockeds.FirstOrDefault(x=> x.UserId==Id && x.TargetUserId==temp);
+                
+                BlockCustomerData blockCustomerData = new BlockCustomerData();
+                blockCustomerData.user = user;
+                blockCustomerData.favoriteAndBlocked = FB;
+
+                blockData.Add(blockCustomerData);
+
+                
+
+            }
+
+
+
+            return Json(blockData);
+
+
+        }
+
+
+        public string BlockUnblockCustomer(BlockDTO temp)
+        {
+            int? Id = HttpContext.Session.GetInt32("userId");
+            if (Id == null)
+            {
+                Id = Convert.ToInt32(Request.Cookies["userId"]);
+            }
+
+            FavoriteAndBlocked obj = _db.FavoriteAndBlockeds.FirstOrDefault(x => x.UserId == Id && x.TargetUserId == temp.Id);
+
+            if (temp.Req=="B")
+            {
+               
+                if (obj == null)
+                {
+                    obj = new FavoriteAndBlocked();
+                    obj.UserId = (int)Id;
+                    obj.TargetUserId = temp.Id;
+                    obj.IsBlocked = true;
+
+                }
+                else
+                {
+                    obj.IsBlocked = true;
+                }
+
+            }
+            else
+            {
+                obj.IsBlocked = false;
+
+            }
+            
+
+           
+           
+
+            var result = _db.FavoriteAndBlockeds.Update(obj);
+            _db.SaveChanges();
+            if (result != null)
+            {
+                return "Suceess";
+            }
+            else
+            {
+                return "error";
+            }
+
 
         }
 
