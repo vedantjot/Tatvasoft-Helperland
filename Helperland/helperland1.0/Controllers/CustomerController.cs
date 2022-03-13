@@ -8,7 +8,9 @@ using helperland1._0.ViewModel;
 using System;
 using System.Linq;
 using System.Collections.Generic;
-
+using MimeKit;
+using MailKit.Net.Smtp;
+using System.Threading.Tasks;
 
 namespace helperland1._0.Controllers
 {
@@ -112,54 +114,235 @@ namespace helperland1._0.Controllers
         }
 
         [HttpPost]
-        public IActionResult RescheduleServiceRequest(CustomerDashboard reschedule)
+        public String RescheduleServiceRequest(CustomerDashboard reschedule)
         {
             ServiceRequest rescheduleService = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == reschedule.ServiceRequestId);
 
             Console.WriteLine(reschedule.ServiceRequestId);
 
-            string date = reschedule.Date+ " " + reschedule.StartTime;
+            string date = reschedule.Date + " " + reschedule.StartTime;
             Console.WriteLine(reschedule.Date);
 
             rescheduleService.ServiceStartDate = DateTime.Parse(date);
             rescheduleService.ServiceRequestId = reschedule.ServiceRequestId;
+
+            if (rescheduleService.Status == 2)
+            {
+                int conflict = CheckConflict(rescheduleService);
+
+                if (conflict != -1)
+                {
+                    ServiceRequest conflictReqObj = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == conflict);
+                    DateTime conflictDateStart = conflictReqObj.ServiceStartDate;
+                    DateTime ConflictDateEnd = conflictDateStart.AddMinutes((double)((conflictReqObj.ServiceHours + conflictReqObj.ExtraHours) * 60));
+
+                    String str = "Another service request has been assigned to the service provider on " + conflictDateStart.ToString() + " to " + ConflictDateEnd.ToString() + ". Either choose another date or pick up a different time slot.";
+                    return str;
+
+                }
+
+                User temp = _db.Users.FirstOrDefault(x=> x.UserId==rescheduleService.ServiceProviderId);
+
+                MimeMessage message = new MimeMessage();
+
+                MailboxAddress from = new MailboxAddress("Helperland",
+                "vedantjotangiya@gmail.com");
+                message.From.Add(from);
+
+                MailboxAddress to = new MailboxAddress(temp.FirstName, temp.Email);
+                message.To.Add(to);
+
+                message.Subject = "Service Request Rescheduled ";
+
+                BodyBuilder bodyBuilder = new BodyBuilder();
+                bodyBuilder.HtmlBody = "<h1>Service request with Id=" + rescheduleService.ServiceRequestId + ", has been rescheduled to " + rescheduleService.ServiceStartDate +"</ h1 > ";
+
+
+
+                message.Body = bodyBuilder.ToMessageBody();
+
+                SmtpClient client = new SmtpClient();
+                client.Connect("smtp.gmail.com", 587, false);
+                client.Authenticate("vedantjotangiya@gmail.com", "Vedantjot@123");
+                client.Send(message);
+                client.Disconnect(true);
+                client.Dispose();
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
             rescheduleService.ModifiedDate = DateTime.Now;
-           
+
             var result = _db.ServiceRequests.Update(rescheduleService);
             _db.SaveChanges();
 
             if (result != null)
             {
-                return Ok(Json("true"));
+                return "true";
             }
 
-            return Ok(Json("false"));
+            return "error";
         }
 
 
 
 
+
+        public int CheckConflict(ServiceRequest request)
+        {
+
+
+            int Id = (int)request.ServiceProviderId;
+
+
+            String reqdate = request.ServiceStartDate.ToString("yyyy-MM-dd");
+            Console.WriteLine(reqdate);
+
+            String startDateStr = reqdate + " 00:00:00.000";
+            String endDateStr = reqdate + " 23:59:59.999";
+
+            Console.WriteLine(startDateStr);
+
+            DateTime startDate = DateTime.ParseExact(startDateStr, "yyyy-MM-dd HH:mm:ss.fff",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+
+            DateTime endDate = DateTime.ParseExact(endDateStr, "yyyy-MM-dd HH:mm:ss.fff",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+
+            List<ServiceRequest> list = _db.ServiceRequests.Where(x => (x.ServiceProviderId == Id) && (x.Status == 2) && (x.ServiceStartDate > startDate && x.ServiceStartDate < endDate)).ToList();
+
+            double mins = ((double)(request.ServiceHours + request.ExtraHours)) * 60;
+            DateTime endTimeRequest = request.ServiceStartDate.AddMinutes(mins + 60);
+
+            request.ServiceStartDate = request.ServiceStartDate.AddMinutes(-60);
+            Console.WriteLine(endTimeRequest);
+            Console.WriteLine(request.ServiceStartDate);
+            foreach (ServiceRequest booked in list)
+            {
+                mins = ((double)(booked.ServiceHours + booked.ExtraHours)) * 60;
+                DateTime endTimeBooked = booked.ServiceStartDate.AddMinutes(mins);
+
+                if (request.ServiceStartDate < booked.ServiceStartDate)
+                {
+                    if (endTimeRequest <= booked.ServiceStartDate)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return booked.ServiceRequestId;
+                    }
+                }
+                else
+                {
+                    if (request.ServiceStartDate < endTimeBooked)
+                    {
+                        return booked.ServiceRequestId;
+                    }
+                }
+
+            }
+
+
+
+            return -1;
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
         [HttpPost]
-        public IActionResult CancelServiceRequest(ServiceRequest cancel)
+        public async Task<IActionResult> CancelServiceRequest(ServiceRequest cancel)
         {
 
 
 
             Console.WriteLine(cancel.ServiceRequestId);
-                ServiceRequest cancelService = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == cancel.ServiceRequestId);
-                cancelService.Status = 4;
-                if (cancel.Comments != null)
-                {
-                    cancelService.Comments = cancel.Comments;
-                }
+            ServiceRequest cancelService = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == cancel.ServiceRequestId);
+            cancelService.Status = 4;
+            if (cancel.Comments != null)
+            {
+                cancelService.Comments = cancel.Comments;
+            }
 
-                var result = _db.ServiceRequests.Update(cancelService);
-                _db.SaveChanges();
-                if (result != null)
-                {
-                    return Ok(Json("true"));
-                }
-            
+            var result = _db.ServiceRequests.Update(cancelService);
+            _db.SaveChanges();
+            if (result != null)
+            {
+
+                await Task.Run(() => {
+
+                    if (cancelService.ServiceProviderId != null)
+                    {
+
+                        User temp = _db.Users.FirstOrDefault(x => x.UserId == cancelService.ServiceProviderId);
+
+
+                        MimeMessage message = new MimeMessage();
+
+                        MailboxAddress from = new MailboxAddress("Helperland",
+                        "vedantjotangiya@gmail.com");
+                        message.From.Add(from);
+
+                        MailboxAddress to = new MailboxAddress(temp.FirstName, temp.Email);
+                        message.To.Add(to);
+
+                        message.Subject = "Service Request cancelled ";
+
+                        BodyBuilder bodyBuilder = new BodyBuilder();
+                        bodyBuilder.HtmlBody = "<h1>Service request with Id=" + cancelService.ServiceRequestId + ", has been cancled </ h1 > ";
+
+
+
+                        message.Body = bodyBuilder.ToMessageBody();
+
+                        SmtpClient client = new SmtpClient();
+                        client.Connect("smtp.gmail.com", 587, false);
+                        client.Authenticate("vedantjotangiya@gmail.com", "Vedantjot@123");
+                        client.Send(message);
+                        client.Disconnect(true);
+                        client.Dispose();
+
+                    }
+
+
+
+
+                });
+              
+
+
+
+                return Ok(Json("true"));
+            }
+
             return Ok(Json("false"));
         }
 
@@ -341,7 +524,7 @@ namespace helperland1._0.Controllers
         }
 
         [HttpPost]
-        public IActionResult  ValidPostalCode(PostalCode obj)
+        public IActionResult ValidPostalCode(PostalCode obj)
         {
             if (ModelState.IsValid)
             {
@@ -355,7 +538,7 @@ namespace helperland1._0.Controllers
 
                     return Ok(Json("true"));
                 }
-               // TempData["wrongZipCode"] = "Postal code you have entered is not valid.";
+                // TempData["wrongZipCode"] = "Postal code you have entered is not valid.";
                 return Ok(Json("false"));
             }
             else
@@ -367,22 +550,22 @@ namespace helperland1._0.Controllers
         [HttpPost]
         public ActionResult ScheduleService(ScheduleService schedule)
         {
-           
-             if (ModelState.IsValid)
-             {
 
-                
-                 return Ok(Json("true"));
+            if (ModelState.IsValid)
+            {
 
 
-             }
-             else
-             {
-               
+                return Ok(Json("true"));
+
+
+            }
+            else
+            {
+
                 return Ok(Json("false"));
-             }
+            }
 
-         
+
 
         }
 
@@ -394,17 +577,17 @@ namespace helperland1._0.Controllers
             int Id = -1;
 
             List<Address> Addresses = new List<Address>();
-            if(HttpContext.Session.GetInt32("userId") != null)
+            if (HttpContext.Session.GetInt32("userId") != null)
             {
                 Id = (int)HttpContext.Session.GetInt32("userId");
             }
-            else if(Request.Cookies["userId"] != null)
+            else if (Request.Cookies["userId"] != null)
             {
                 Id = int.Parse(Request.Cookies["userId"]);
-             
+
             }
-            
-           
+
+
             string postalcode = obj.postalcode;
             Console.WriteLine(obj.postalcode);
             var table = _db.UserAddresses.Where(x => x.UserId == Id && x.PostalCode == postalcode).ToList();
@@ -421,7 +604,7 @@ namespace helperland1._0.Controllers
                 useradd.PostalCode = add.PostalCode;
                 useradd.Mobile = add.Mobile;
                 useradd.isDefault = add.IsDefault;
-                
+
                 Addresses.Add(useradd);
             }
             Console.WriteLine("2");
@@ -482,7 +665,7 @@ namespace helperland1._0.Controllers
         {
             int Id = -1;
 
-          
+
             if (HttpContext.Session.GetInt32("userId") != null)
             {
                 Id = (int)HttpContext.Session.GetInt32("userId");
@@ -571,16 +754,92 @@ namespace helperland1._0.Controllers
                 _db.ServiceRequestExtras.Add(srExtra);
                 _db.SaveChanges();
             }
-           
-           
+
+
 
             if (result != null && srAddrResult != null)
             {
+                sendServiceMailtoSP(result.Entity.ServiceRequestId);
                 return Ok(Json(result.Entity.ServiceRequestId));
+
+
             }
 
             return Ok(Json("false"));
         }
+
+
+
+
+
+        public async Task sendServiceMailtoSP(int serviceId)
+        {
+            int Id = -1;
+
+
+            if (HttpContext.Session.GetInt32("userId") != null)
+            {
+                Id = (int)HttpContext.Session.GetInt32("userId");
+            }
+            else if (Request.Cookies["userId"] != null)
+            {
+                Id = int.Parse(Request.Cookies["userId"]);
+
+            }
+
+
+            var serviceProviderList = _db.Users.Where(x => x.UserTypeId == 1 && x.IsApproved == true).ToList();
+            var SpByBlocked = _db.FavoriteAndBlockeds.Where(x => x.TargetUserId == Id && x.IsBlocked == true).Select(x => x.UserId).ToList();
+
+
+
+
+            await Task.Run(() =>
+            {
+                foreach (var temp in serviceProviderList)
+                {
+                    if (!SpByBlocked.Contains(temp.UserId))
+                    {
+                        MimeMessage message = new MimeMessage();
+
+                        MailboxAddress from = new MailboxAddress("Helperland",
+                        "vedantjotangiya@gmail.com");
+                        message.From.Add(from);
+
+                        MailboxAddress to = new MailboxAddress(temp.FirstName, temp.Email);
+                        message.To.Add(to);
+
+                        message.Subject = "New Service Request";
+
+                        BodyBuilder bodyBuilder = new BodyBuilder();
+                        bodyBuilder.HtmlBody = "<h1>A new service request is created with ID number " + serviceId + "</h1>";
+
+
+
+                        message.Body = bodyBuilder.ToMessageBody();
+
+                        SmtpClient client = new SmtpClient();
+                        client.Connect("smtp.gmail.com", 587, false);
+                        client.Authenticate("vedantjotangiya@gmail.com", "Vedantjot@123");
+                        client.Send(message);
+                        client.Disconnect(true);
+                        client.Dispose();
+                    }
+                }
+
+
+            });
+
+
+
+        }
+
+
+
+
+
+
+
 
 
 

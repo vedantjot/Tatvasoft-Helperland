@@ -365,7 +365,6 @@ E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\bin\Debug\netcoreapp3
 E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\helperland1.0.csproj.AssemblyReference.cache
 E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\staticwebassets\helperland1.0.StaticWebAssets.Manifest.cache
 E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\helperland1.0.TagHelpers.input.cache
 E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\helperland1.0.TagHelpers.output.cache
