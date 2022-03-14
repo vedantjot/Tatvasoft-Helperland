@@ -413,3 +413,4 @@ E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\bin\Debug\netcoreapp3
 E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\helperland1.0.csproj.AssemblyReference.cache
+E:\tatvasoft\Tatvasoft-helperland\Helperland\Helperland1.0\obj\Debug\netcoreapp3.1\Razor\Views\Shared\SpSettings.cshtml.g.cs
