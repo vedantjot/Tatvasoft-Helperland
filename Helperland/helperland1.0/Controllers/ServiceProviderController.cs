@@ -890,6 +890,8 @@ namespace helperland1._0.Controllers
 
             }
 
+
+
             return Json(ratingDTOsList);
 
         }

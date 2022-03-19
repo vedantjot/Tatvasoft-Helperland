@@ -79,12 +79,22 @@ namespace helperland1._0.Controllers
 
                         return RedirectToAction("SPServiceRequest", "Serviceprovider");
                     }
-                   /* else if (user.UserTypeId == 3)
-                    {
-                        return RedirectToAction("ServiceRequest", "Admin");
-                    }*/
 
-                    return RedirectToAction("CustomerDashboard", "Customer");
+                    else if (U.UserTypeId == 2)
+                    {
+                        if (user.remember == true)
+                        {
+                            CookieOptions cookieRemember = new CookieOptions();
+                            cookieRemember.Expires = DateTime.Now.AddSeconds(604800);
+                            Response.Cookies.Append("userId", Convert.ToString(U.UserId), cookieRemember);
+                        }
+
+
+                        HttpContext.Session.SetInt32("userId", U.UserId);
+
+                        return RedirectToAction("AdminPanel", "Admin");
+                    }
+
                 }
                 else
                 {
