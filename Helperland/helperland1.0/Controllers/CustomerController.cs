@@ -71,9 +71,9 @@ namespace helperland1._0.Controllers
                         //dash.Date = StartDate.Substring(0, 10);
                         //dash.StartTime = StartDate.Substring(11);
                         dash.Date = service.ServiceStartDate.ToString("dd/MM/yyyy");
-                        dash.StartTime = service.ServiceStartDate.AddHours(0).ToString("HH:mm ");
+                        dash.StartTime = service.ServiceStartDate.AddHours(0).ToString("HH':'mm ");
                         var totaltime = (double)(service.ServiceHours + service.ExtraHours);
-                        dash.EndTime = service.ServiceStartDate.AddHours(totaltime).ToString("HH:mm ");
+                        dash.EndTime = service.ServiceStartDate.AddHours(totaltime).ToString("HH':'mm ");
                         dash.Status = (int)service.Status;
                         dash.TotalCost = service.TotalCost;
 
@@ -118,10 +118,10 @@ namespace helperland1._0.Controllers
         {
             ServiceRequest rescheduleService = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == reschedule.ServiceRequestId);
 
-            Console.WriteLine(reschedule.ServiceRequestId);
+            //Console.WriteLine(reschedule.ServiceRequestId);
 
             string date = reschedule.Date + " " + reschedule.StartTime;
-            Console.WriteLine(reschedule.Date);
+            //Console.WriteLine(reschedule.Date);
 
             rescheduleService.ServiceStartDate = DateTime.Parse(date);
             rescheduleService.ServiceRequestId = reschedule.ServiceRequestId;
@@ -213,12 +213,12 @@ namespace helperland1._0.Controllers
 
 
             String reqdate = request.ServiceStartDate.ToString("yyyy-MM-dd");
-            Console.WriteLine(reqdate);
+            //Console.WriteLine(reqdate);
 
             String startDateStr = reqdate + " 00:00:00.000";
             String endDateStr = reqdate + " 23:59:59.999";
 
-            Console.WriteLine(startDateStr);
+            //Console.WriteLine(startDateStr);
 
             DateTime startDate = DateTime.ParseExact(startDateStr, "yyyy-MM-dd HH:mm:ss.fff",
                                        System.Globalization.CultureInfo.InvariantCulture);
@@ -232,8 +232,8 @@ namespace helperland1._0.Controllers
             DateTime endTimeRequest = request.ServiceStartDate.AddMinutes(mins + 60);
 
             request.ServiceStartDate = request.ServiceStartDate.AddMinutes(-60);
-            Console.WriteLine(endTimeRequest);
-            Console.WriteLine(request.ServiceStartDate);
+            //Console.WriteLine(endTimeRequest);
+            //Console.WriteLine(request.ServiceStartDate);
             foreach (ServiceRequest booked in list)
             {
                 mins = ((double)(booked.ServiceHours + booked.ExtraHours)) * 60;
@@ -284,7 +284,7 @@ namespace helperland1._0.Controllers
 
 
 
-            Console.WriteLine(cancel.ServiceRequestId);
+            //Console.WriteLine(cancel.ServiceRequestId);
             ServiceRequest cancelService = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == cancel.ServiceRequestId);
             cancelService.Status = 4;
             if (cancel.Comments != null)
@@ -355,15 +355,15 @@ namespace helperland1._0.Controllers
             ServiceRequest sr = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == ID.ServiceRequestId);
             Details.ServiceRequestId = ID.ServiceRequestId;
             Details.Date = sr.ServiceStartDate.ToString("dd/MM/yyyy");
-            Details.StartTime = sr.ServiceStartDate.ToString("HH:mm");
+            Details.StartTime = sr.ServiceStartDate.ToString("HH':'mm");
             Details.Duration = (decimal)(sr.ServiceHours + sr.ExtraHours);
-            Details.EndTime = sr.ServiceStartDate.AddHours((double)sr.SubTotal).ToString("HH:mm");
+            Details.EndTime = sr.ServiceStartDate.AddHours((double)sr.SubTotal).ToString("HH':'mm");
             Details.TotalCost = sr.TotalCost;
             Details.Comments = sr.Comments;
             Details.Status = (int)sr.Status;
 
-            Console.WriteLine("helo");
-            Console.WriteLine(Details.Status);
+            //Console.WriteLine("helo");
+            //Console.WriteLine(Details.Status);
             List<ServiceRequestExtra> SRExtra = _db.ServiceRequestExtras.Where(x => x.ServiceRequestId == ID.ServiceRequestId).ToList();
 
             foreach (ServiceRequestExtra row in SRExtra)
@@ -449,7 +449,7 @@ namespace helperland1._0.Controllers
                 ServiceRequest sr = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == rating.ServiceRequestId);
                 rating.RatingTo = (int)sr.ServiceProviderId;
                 rating.RatingFrom = (int)Id;
-                Console.WriteLine(rating.Ratings);
+                //Console.WriteLine(rating.Ratings);
 
                 var result = _db.Ratings.Add(rating);
                 _db.SaveChanges();
@@ -589,13 +589,13 @@ namespace helperland1._0.Controllers
 
 
             string postalcode = obj.postalcode;
-            Console.WriteLine(obj.postalcode);
+            //Console.WriteLine(obj.postalcode);
             var table = _db.UserAddresses.Where(x => x.UserId == Id && x.PostalCode == postalcode).ToList();
-            Console.WriteLine(table.ToString());
+            //Console.WriteLine(table.ToString());
 
             foreach (var add in table)
             {
-                Console.WriteLine("1");
+                //Console.WriteLine("1");
                 Address useradd = new Address();
                 useradd.AddressId = add.AddressId;
                 useradd.AddressLine1 = add.AddressLine1;
@@ -607,7 +607,7 @@ namespace helperland1._0.Controllers
 
                 Addresses.Add(useradd);
             }
-            Console.WriteLine("2");
+            //Console.WriteLine("2");
 
             return new JsonResult(Addresses);
         }
@@ -621,7 +621,7 @@ namespace helperland1._0.Controllers
             {
 
 
-                Console.WriteLine("Inside Addnew address 1");
+                //Console.WriteLine("Inside Addnew address 1");
                 int Id = -1;
 
 
@@ -634,8 +634,8 @@ namespace helperland1._0.Controllers
                     Id = int.Parse(Request.Cookies["userId"]);
 
                 }
-                Console.WriteLine("Inside Addnew address 2");
-                Console.WriteLine(Id);
+                //Console.WriteLine("Inside Addnew address 2");
+                //Console.WriteLine(Id);
 
                 useradd.UserId = Id;
                 useradd.IsDefault = false;
@@ -643,10 +643,10 @@ namespace helperland1._0.Controllers
                 User user = _db.Users.Where(x => x.UserId == Id).FirstOrDefault();
                 useradd.Email = user.Email;
                 var result = _db.UserAddresses.Add(useradd);
-                Console.WriteLine("Inside Addnew address 3");
+                //Console.WriteLine("Inside Addnew address 3");
                 _db.SaveChanges();
 
-                Console.WriteLine("Inside Addnew address 4");
+                //Console.WriteLine("Inside Addnew address 4");
                 if (result != null)
                 {
                     return Ok(Json("true"));

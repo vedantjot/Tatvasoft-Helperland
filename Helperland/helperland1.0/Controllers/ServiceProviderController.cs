@@ -56,7 +56,7 @@ namespace helperland1._0.Controllers
 
             var BlockedCustomer = _db.FavoriteAndBlockeds.Where(x=> x.UserId==Id && x.IsBlocked==true).Select(x => x.TargetUserId).ToList();
 
-            Console.WriteLine(BlockedCustomer.ToString());
+            //Console.WriteLine(BlockedCustomer.ToString());
 
             if (ServiceRequest.Any())
             {
@@ -72,9 +72,9 @@ namespace helperland1._0.Controllers
                         //temp.Date = StartDate.Substring(0, 10);
                         //temp.StartTime = StartDate.Substring(11);
                         temp.Date = req.ServiceStartDate.ToString("dd/MM/yyyy");
-                        temp.StartTime = req.ServiceStartDate.AddHours(0).ToString("HH:mm ");
+                        temp.StartTime = req.ServiceStartDate.AddHours(0).ToString("HH':'mm ");
                         var totaltime = (double)(req.ServiceHours + req.ExtraHours);
-                        temp.EndTime = req.ServiceStartDate.AddHours(totaltime).ToString("HH:mm ");
+                        temp.EndTime = req.ServiceStartDate.AddHours(totaltime).ToString("HH':'mm ");
                         temp.Status = (int)req.Status;
                         temp.TotalCost = req.TotalCost;
                         temp.HasPet = req.HasPets;
@@ -158,10 +158,10 @@ namespace helperland1._0.Controllers
 
             Details.Date = sr.ServiceStartDate.ToString("dd/MM/yyyy");
 
-            Details.StartTime = sr.ServiceStartDate.ToString("HH:mm");
+            Details.StartTime = sr.ServiceStartDate.ToString("HH':'mm");
 
             Details.Duration = (decimal)(sr.ServiceHours + sr.ExtraHours);
-            Details.EndTime = sr.ServiceStartDate.AddHours((double)sr.SubTotal).ToString("HH:mm");
+            Details.EndTime = sr.ServiceStartDate.AddHours((double)sr.SubTotal).ToString("HH':'mm");
             Details.TotalCost = sr.TotalCost;
             Details.Comments = sr.Comments;
             Details.Status = (int)sr.Status;
@@ -262,7 +262,7 @@ namespace helperland1._0.Controllers
 
         public string ConflictDetails(SPDashboard ID)
         {
-            Console.WriteLine(ID.ServiceRequestId);
+            //Console.WriteLine(ID.ServiceRequestId);
 
             int conflict = CheckConflict(ID.ServiceRequestId);
 
@@ -296,12 +296,12 @@ namespace helperland1._0.Controllers
             ServiceRequest request = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == SRID);
 
             String reqdate = request.ServiceStartDate.ToString("yyyy-MM-dd");
-            Console.WriteLine(reqdate);
+            //Console.WriteLine(reqdate);
 
             String startDateStr = reqdate + " 00:00:00.000";
             String endDateStr = reqdate + " 23:59:59.999";
 
-            Console.WriteLine(startDateStr);
+            //Console.WriteLine(startDateStr);
 
             DateTime startDate = DateTime.ParseExact(startDateStr, "yyyy-MM-dd HH:mm:ss.fff",
                                        System.Globalization.CultureInfo.InvariantCulture);
@@ -315,8 +315,8 @@ namespace helperland1._0.Controllers
             DateTime endTimeRequest = request.ServiceStartDate.AddMinutes(mins + 60);
 
             request.ServiceStartDate = request.ServiceStartDate.AddMinutes(-60);
-            Console.WriteLine(endTimeRequest);
-            Console.WriteLine(request.ServiceStartDate);
+            //Console.WriteLine(endTimeRequest);
+            //Console.WriteLine(request.ServiceStartDate);
             foreach (ServiceRequest booked in list)
             {
                 mins = ((double)(booked.ServiceHours + booked.ExtraHours)) * 60;
@@ -449,9 +449,9 @@ namespace helperland1._0.Controllers
                     temp.ServiceRequestId = req.ServiceRequestId;
                     var StartDate = req.ServiceStartDate.ToString();
                     temp.Date = req.ServiceStartDate.ToString("dd/MM/yyyy");
-                    temp.StartTime = req.ServiceStartDate.AddHours(0).ToString("HH:mm ");
+                    temp.StartTime = req.ServiceStartDate.AddHours(0).ToString("HH':'mm ");
                     var totaltime = (double)(req.ServiceHours + req.ExtraHours);
-                    temp.EndTime = req.ServiceStartDate.AddHours(totaltime).ToString("HH:mm ");
+                    temp.EndTime = req.ServiceStartDate.AddHours(totaltime).ToString("HH':'mm ");
                    
                     temp.Status = (int)req.Status;
 
@@ -515,7 +515,7 @@ namespace helperland1._0.Controllers
 
         public string cancelRequest(ServiceRequest request)
         {
-            Console.WriteLine(request.ServiceRequestId);
+            //Console.WriteLine(request.ServiceRequestId);
 
             ServiceRequest requestObj= _db.ServiceRequests.FirstOrDefault(x=> x.ServiceRequestId==request.ServiceRequestId);
 
@@ -562,9 +562,9 @@ namespace helperland1._0.Controllers
                     temp.ServiceRequestId = req.ServiceRequestId;
                     var StartDate = req.ServiceStartDate.ToString();
                     temp.Date = req.ServiceStartDate.ToString("dd/MM/yyyy");
-                    temp.StartTime = req.ServiceStartDate.AddHours(0).ToString("HH:mm ");
+                    temp.StartTime = req.ServiceStartDate.AddHours(0).ToString("HH':'mm ");
                     var totaltime = (double)(req.ServiceHours + req.ExtraHours);
-                    temp.EndTime = req.ServiceStartDate.AddHours(totaltime).ToString("HH:mm ");
+                    temp.EndTime = req.ServiceStartDate.AddHours(totaltime).ToString("HH':'mm ");
                     temp.Status = (int)req.Status;
                     //temp.TotalCost = req.TotalCost;
                     // temp.HasPet = req.HasPets;
@@ -856,9 +856,9 @@ namespace helperland1._0.Controllers
                 ratingDTO.CustomerName = customerName;
                 ratingDTO.ServiceRequestId = temp.ServiceRequestId;
                 ratingDTO.ServiceDate = req.ServiceStartDate.ToString("dd/MM/yyyy");
-                ratingDTO.StartTime = req.ServiceStartDate.AddHours(0).ToString("HH:mm ");
+                ratingDTO.StartTime = req.ServiceStartDate.AddHours(0).ToString("HH':'mm ");
                 var totaltime = (double)(req.ServiceHours + req.ExtraHours);
-                ratingDTO.EndTime = req.ServiceStartDate.AddHours(totaltime).ToString("HH:mm ");
+                ratingDTO.EndTime = req.ServiceStartDate.AddHours(totaltime).ToString("HH':'mm ");
                 ratingDTO.Rating = (double)temp.Ratings;
                 ratingDTO.Comments= temp.Comments;
 

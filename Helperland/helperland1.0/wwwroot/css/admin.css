@@ -136,18 +136,18 @@ td button {
 
 
 
-.active {
+.Active {
     border: 1px solid #67B644;
     background-color: #67B644;
     color: #ffffff;
-    padding: 4px 11px 5px 11px;
+    padding: 4px 17px 5px 18px;
 }
 
-.inactive {
+.InActive {
     border: 1px solid #FF6B6B;
     background-color: #FF6B6B;
     color: #ffffff;
-    font-size: 13px;
+
     padding: 4px 11px 5px 11px;
 }
 
@@ -228,16 +228,16 @@ td button {
     flex-wrap: wrap;
 }
 
-.admin-pagenumber-right a {
-    padding: 10px 15.33px 10px 15px;
-    border: 1px solid #E1E1E1;
-    font-size: 14px;
-}
+    .admin-pagenumber-right a {
+        padding: 10px 15.33px 10px 15px;
+        border: 1px solid #E1E1E1;
+        font-size: 14px;
+    }
 
-.admin-pagenumber-right .current {
-    background-color: #646464;
-    color: white
-}
+    .admin-pagenumber-right .current {
+        background-color: #646464;
+        color: white
+    }
 
 .transform_btn {
     transform: rotate(180deg);
@@ -291,15 +291,15 @@ td button {
 }*/
 
 
-    .cap-icon img {
-        width: 44px;
-        height: 44px;
-        margin-right: 5px;
-        border: solid 1px #aaa;
-        background-color: var(--white);
-        border-radius: 50%;
-        float: left;
-    }
+.cap-icon img {
+    width: 44px;
+    height: 44px;
+    margin-right: 5px;
+    border: solid 1px #aaa;
+    background-color: var(--white);
+    border-radius: 50%;
+    float: left;
+}
 
 
 
@@ -349,21 +349,48 @@ td button {
 .thid {
     width: 10% !important;
 }
+
 .thdate {
     width: 15% !important;
 }
+
 .thcust {
     width: 25% !important;
 }
+
 .thsp {
     width: 20% !important;
 }
+
 .thprice {
     width: 10% !important;
 }
+
 .thstatus {
     width: 10% !important;
 }
+
 .thaction {
     width: 10% !important;
 }
+
+
+
+
+
+#AdminEditModal .form-label {
+    margin-bottom: 0;
+    margin-top: 0.5rem;
+}
+
+
+.popuptext p {
+    padding: 5px 0px !important;
+}
+
+    .popuptext p:hover {
+        background-color: beige;
+        /*     color:white;*/
+    }
+
+
