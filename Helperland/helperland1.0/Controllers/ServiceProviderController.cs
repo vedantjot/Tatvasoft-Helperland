@@ -56,6 +56,10 @@ namespace helperland1._0.Controllers
 
             var BlockedCustomer = _db.FavoriteAndBlockeds.Where(x=> x.UserId==Id && x.IsBlocked==true).Select(x => x.TargetUserId).ToList();
 
+            var SPBlocked = _db.FavoriteAndBlockeds.Where(x => x.TargetUserId == Id && x.IsBlocked == true).Select(x => x.UserId).ToList();
+
+            BlockedCustomer.AddRange(SPBlocked);
+
             //Console.WriteLine(BlockedCustomer.ToString());
 
             if (ServiceRequest.Any())

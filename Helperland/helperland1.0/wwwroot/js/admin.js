@@ -822,7 +822,7 @@ function adminserviceDatatable() {
         iDisplayLength: 10,
         aLengthMenu: [[5, 10, 15, -1], [5, 10, 15, "All"]],
 
-        columnDefs: [{ orderable: false, targets: 4 }],
+        columnDefs: [{ orderable: false, targets: 6 }],
         order: [[0, "desc"]],
 
 
@@ -857,7 +857,7 @@ function adminUserDatatable() {
         iDisplayLength: 10,
         aLengthMenu: [[5, 10, 15, -1], [5, 10, 15, "All"]],
 
-        columnDefs: [{ orderable: false, targets: 4 }],
+        columnDefs: [{ orderable: false, targets: 6 }],
         order: [[0, "desc"]],
 
 
