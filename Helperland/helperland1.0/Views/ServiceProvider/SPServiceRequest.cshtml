@@ -9,6 +9,8 @@
  {
 <link rel="stylesheet" href="~/css/ServiceProvider.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
+
  }
 
 
@@ -43,7 +45,7 @@
 
         </button>
 
-        <button class="tablinks"  id="ServiceScheduleTabBtn"> Service Schedule </button>
+        <button class="tablinks"  onclick="Sp_TabNav(event, 'ServiceSchedule')"  id="ServiceScheduleTabBtn"> Service Schedule </button>
         <button class="tablinks" onclick="Sp_TabNav(event, 'ServiceHistory')" id="ServiceHistoryTabBtn">Service History</button>
         <button class="tablinks" onclick="Sp_TabNav(event, 'MyRating')" id="MyRatingTabBtn">My Rating</button>
         <button class="tablinks " onclick="Sp_TabNav(event, 'BlockCustomer')" id="BlockCustomerTabBtn">Block Customer</button>
@@ -51,7 +53,7 @@
         <button class="tablinks " >Notification</button>
         <button class="tablinks  " onclick="Sp_TabNav(event, 'SPSettings')" id="SettingsTabBtn">Settings</button>
 
-
+       
 
     </div>
 
@@ -61,7 +63,8 @@
     @await Html.PartialAsync("SpNewServiceRequest")
     @await Html.PartialAsync("SpMyRating")
     @await Html.PartialAsync("SpBlockCustomer")
-     @await Html.PartialAsync("SpSettings")
+    @await Html.PartialAsync("SpSettings")
+    @await Html.PartialAsync("SpServiceSchedule")
 
 
 
@@ -94,3 +97,4 @@
 	<script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
 	<script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
     <script src="~/js/serviceProvider.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
