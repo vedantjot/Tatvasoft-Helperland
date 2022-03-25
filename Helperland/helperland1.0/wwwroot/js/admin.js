@@ -190,11 +190,11 @@ function getadminservicereq() {
                         break;
                     case 3: /*completed */
                         varStatus = "completed";
-                        popupfield = '    <p> Refund</p>  ';
+                        popupfield = '    <p class="AdminRefund" data-value=' + result[i].serviceRequestId + '> Refund</p>  ';
                         break;
                     case 4: /*cancelled*/
                         varStatus = "cancelled";
-                        popupfield = '    <p> Refund</p>  ';
+                        popupfield = '    <p class="AdminRefund" data-value=' + result[i].serviceRequestId + '> Refund</p>  ';
                         break;
                     default: /*other status */
                         varStatus = "invalid";
@@ -767,6 +767,126 @@ $(document).on("click", ".popuptext.userpopup", function () {
   
 
 });
+
+
+
+
+
+
+
+
+
+
+//Refund
+
+
+
+$(document).on('click', '.AdminRefund', function () {
+
+    $("#RefundModelBtn").click();
+    serviceReqId = this.getAttribute("data-value");
+
+    $("#RefundPercentage").val(0);
+    $("#WhyRefund").val("");
+    $("#CallNotes").val("");
+    $("#CalculateAmount").val("");
+
+    var data = {};
+    data.ServiceRequestId = parseInt(serviceReqId);
+
+    $.ajax({
+        type: 'GET',
+        url: '/Admin/GetAdminRefundData',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        data: data,
+        success: function (result) {
+
+            if (result.refundAmount == null) {
+                $("#RefundSubmit").removeAttr('disabled');
+                $("#RefundPercentage").removeAttr('disabled');
+                $("#AdminRefundAlert").removeClass("alert-danger alert-success").addClass(" d-none");
+                result.refundAmount = 0;
+            } else {
+                $("#AdminRefundAlert").removeClass("alert-danger d-none").addClass("alert-success").text("Refund had been given.");
+
+                $("#RefundSubmit").attr('disabled', 'disabled');
+                $("#RefundPercentage").attr('disabled', 'disabled');
+
+            }
+
+
+
+            $("#PaidAmount").html(result.totalCost);
+            $("#RefundAmount").html(result.refundAmount);
+            $("#BalanceAmount").html(result.totalCost - result.refundAmount);
+
+
+
+
+        },
+        error: function () {
+            alert("error");
+        }
+    });
+
+
+});
+
+
+
+$('#RefundPercentage').on('change keyup', function () {
+    var paidAmount = $(this).val();
+    paidAmount = parseFloat(paidAmount).toFixed(2);
+
+    if (paidAmount >= 0 && paidAmount <= 100) {
+        var totalprice = $("#PaidAmount").html();
+        refundAmount = parseFloat((totalprice * paidAmount) / 100).toFixed(2);
+        balanceAmount = parseFloat(totalprice - refundAmount).toFixed(2);
+        $("#CalculateAmount").val(refundAmount);
+        $("#RefundAmount").html(refundAmount);
+        $("#BalanceAmount").html(balanceAmount);
+        $("#RefundSubmit").removeAttr('disabled');
+    } else {
+        $("#CalculateAmount").val("Invalid");
+        $("#RefundAmount").html("Invalid");
+        $("#BalanceAmount").html("Invalid");
+
+        $("#RefundSubmit").attr('disabled', 'disabled');
+    }
+
+});
+
+
+$("#RefundSubmit").on('click', function () {
+    var data = {};
+    data.ServiceRequestId = parseInt(serviceReqId);
+    data.RefundedAmount = parseFloat($("#CalculateAmount").val());
+
+    $.ajax({
+        type: 'GET',
+        url: '/Admin/AdminRefundUpdate',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        data: data,
+        success: function (result) {
+
+            if (result == "true") {
+                $("#AdminRefundAlert").removeClass("alert-danger d-none").addClass("alert-success").text("Refund has been initiated.");
+                $("#RefundSubmit").attr('disabled', 'disabled');
+                $("#RefundPercentage").attr('disabled', 'disabled');
+
+            }
+            else {
+                $("#AdminRefundAlert").removeClass("alert-success d-none").addClass("alert-danger").text("opps! Something went wrong.");
+
+            }
+
+        },
+        error: function () {
+            alert("error");
+        }
+    });
+});
+
 
 
 

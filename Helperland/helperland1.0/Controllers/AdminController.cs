@@ -587,6 +587,56 @@ namespace Helperland.Controllers
 
 
 
+        //refund
+
+        
+   
+
+        public JsonResult GetAdminRefundData(ServiceRequest Id)
+        {
+
+
+            Console.WriteLine(Id.ServiceRequestId);
+            var req = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == Id.ServiceRequestId);
+
+
+            var myData = new
+            {
+                TotalCost = req.TotalCost,
+                RefundAmount = req.RefundedAmount
+
+            };
+
+            return Json(myData);
+        }
+
+        public string AdminRefundUpdate(ServiceRequest req)
+        {
+            Console.WriteLine(req.RefundedAmount);
+            Console.WriteLine(req.ServiceRequestId);
+
+
+            ServiceRequest obj = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == req.ServiceRequestId);
+
+
+            obj.RefundedAmount = req.RefundedAmount;
+
+            var result = _db.ServiceRequests.Update(obj);
+
+            _db.SaveChanges();
+
+            if (result != null)
+            {
+
+                return "true";
+            }
+
+            return "error";
+        }
+
+
+
+
 
 
 
