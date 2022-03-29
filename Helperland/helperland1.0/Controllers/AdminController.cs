@@ -33,8 +33,8 @@ namespace Helperland.Controllers
             {
                 Id = Convert.ToInt32(Request.Cookies["userId"]);
             }
-
-            if (Id == null)
+            Console.WriteLine(Id+"36");
+            if (Id == null || Id==0)
             {
                 return RedirectToAction("Index", "Public", new { loginFail = "true" });
             }
@@ -569,7 +569,7 @@ namespace Helperland.Controllers
 
                         SmtpClient client = new SmtpClient();
                         client.Connect("smtp.gmail.com", 587, false);
-                        client.Authenticate("vedantjotangiya@gmail.com", "Vedantjot@123");
+                        client.Authenticate("vedantjotangiya@gmail.com", "#tempmail#for#helperland29");
                         client.Send(message);
                         client.Disconnect(true);
                         client.Dispose();

@@ -163,7 +163,7 @@ namespace helperland1._0.Controllers
 
                 SmtpClient client = new SmtpClient();
                 client.Connect("smtp.gmail.com", 587, false);
-                client.Authenticate("vedantjotangiya@gmail.com", "Vedantjot@123");
+                client.Authenticate("vedantjotangiya@gmail.com", "#tempmail#for#helperland29");
                 client.Send(message);
                 client.Disconnect(true);
                 client.Dispose();
@@ -325,7 +325,7 @@ namespace helperland1._0.Controllers
 
                         SmtpClient client = new SmtpClient();
                         client.Connect("smtp.gmail.com", 587, false);
-                        client.Authenticate("vedantjotangiya@gmail.com", "Vedantjot@123");
+                        client.Authenticate("vedantjotangiya@gmail.com", "#tempmail#for#helperland29");
                         client.Send(message);
                         client.Disconnect(true);
                         client.Dispose();
@@ -590,7 +590,7 @@ namespace helperland1._0.Controllers
 
             string postalcode = obj.postalcode;
             //Console.WriteLine(obj.postalcode);
-            var table = _db.UserAddresses.Where(x => x.UserId == Id && x.PostalCode == postalcode).ToList();
+            var table = _db.UserAddresses.Where(x => x.UserId == Id && x.PostalCode == postalcode && x.IsDeleted==false).ToList();
             //Console.WriteLine(table.ToString());
 
             foreach (var add in table)
@@ -759,7 +759,7 @@ namespace helperland1._0.Controllers
 
             if (result != null && srAddrResult != null)
             {
-                sendServiceMailtoSP(result.Entity.ServiceRequestId);
+                sendServiceMailtoSP(result.Entity.ServiceRequestId,result.Entity.ZipCode);
                 return Ok(Json(result.Entity.ServiceRequestId));
 
 
@@ -772,7 +772,7 @@ namespace helperland1._0.Controllers
 
 
 
-        public async Task sendServiceMailtoSP(int serviceId)
+        public async Task sendServiceMailtoSP(int serviceId,String zipcode)
         {
             int Id = -1;
 
@@ -787,8 +787,10 @@ namespace helperland1._0.Controllers
 
             }
 
+            
 
-            var serviceProviderList = _db.Users.Where(x => x.UserTypeId == 1 && x.IsApproved == true).ToList();
+
+            var serviceProviderList = _db.Users.Where(x => x.UserTypeId == 1 && x.IsActive == true && x.ZipCode==zipcode).ToList();
             var BlockedBySp = _db.FavoriteAndBlockeds.Where(x => x.TargetUserId == Id && x.IsBlocked == true).Select(x => x.UserId).ToList();
             var SpBlockedByCust = _db.FavoriteAndBlockeds.Where(x => x.UserId == Id && x.IsBlocked == true).Select(x => x.TargetUserId).ToList();
 
@@ -821,7 +823,7 @@ namespace helperland1._0.Controllers
 
                         SmtpClient client = new SmtpClient();
                         client.Connect("smtp.gmail.com", 587, false);
-                        client.Authenticate("vedantjotangiya@gmail.com", "Vedantjot@123");
+                        client.Authenticate("vedantjotangiya@gmail.com", "#tempmail#for#helperland29");
                         client.Send(message);
                         client.Disconnect(true);
                         client.Dispose();

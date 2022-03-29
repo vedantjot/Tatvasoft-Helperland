@@ -32,7 +32,7 @@ namespace helperland1._0.Controllers
                 Id = Convert.ToInt32(Request.Cookies["userId"]);
             }
 
-            if (Id == null)
+            if (Id == null || Id==0)
             {
                 return RedirectToAction("Index", "Public", new { loginFail = "true" });
             }
@@ -60,7 +60,7 @@ namespace helperland1._0.Controllers
 
             BlockedCustomer.AddRange(SPBlocked);
 
-            //Console.WriteLine(BlockedCustomer.ToString());
+            ////Console.WriteLine(BlockedCustomer.ToString());
 
             if (ServiceRequest.Any())
             {
@@ -266,7 +266,7 @@ namespace helperland1._0.Controllers
 
         public string ConflictDetails(SPDashboard ID)
         {
-            //Console.WriteLine(ID.ServiceRequestId);
+            ////Console.WriteLine(ID.ServiceRequestId);
 
             int conflict = CheckConflict(ID.ServiceRequestId);
 
@@ -300,7 +300,7 @@ namespace helperland1._0.Controllers
             ServiceRequest request = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == SRID);
 
             String reqdate = request.ServiceStartDate.ToString("yyyy-MM-dd");
-            //Console.WriteLine(reqdate);
+            ////Console.WriteLine(reqdate);
 
             String startDateStr = reqdate + " 00:00:00.000";
             String endDateStr = reqdate + " 23:59:59.999";
@@ -407,7 +407,7 @@ namespace helperland1._0.Controllers
 
                         SmtpClient client = new SmtpClient();
                         client.Connect("smtp.gmail.com", 587, false);
-                        client.Authenticate("vedantjotangiya@gmail.com", "Vedantjot@123");
+                        client.Authenticate("vedantjotangiya@gmail.com", "#tempmail#for#helperland29");
                         client.Send(message);
                         client.Disconnect(true);
                         client.Dispose();

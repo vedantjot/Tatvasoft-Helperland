@@ -135,16 +135,20 @@ function postalSubmit() {
 
             }
             else if (result.value == "false") {
-                alert("No service avaliable ");
+                
+                document.getElementById("acceptAlert").click();
+                $('#NewServiceAcceptStatus').text("No service avaliable").css("color", "red");
             }
             else {
-                alert("Invalid Postal code");
+              
+                document.getElementById("acceptAlert").click();
+                $('#NewServiceAcceptStatus').text("Invalid Postal code").css("color", "red");
             }
         },
         error: function () {
             alert('Failed to receive the Data');
 
-            console.log('Failed ');
+            //console.log('Failed ');
         }
     });
 
@@ -155,9 +159,9 @@ function postalSubmit() {
 
 function scheduleSubmit() {
     var data = $("#form2").serialize();
-    console.log(data);
+    //console.log(data);
 
-    alert(data.toString());
+   // alert(data.toString());
 
     //document.getElementById("form3").innerHTML="<h4>"+data.toString()+"</h4>";
 
@@ -176,12 +180,14 @@ function scheduleSubmit() {
 
             }
             else {
-                alert("schedule is not valid");
+              
+                document.getElementById("acceptAlert").click();
+                $('#NewServiceAcceptStatus').text("schedule is not valid").css("color", "red");
             }
         },
         error: function () {
             alert('Failed to receive the Data');
-            console.log('Failed ');
+            //console.log('Failed ');
         }
     });
 }
@@ -191,7 +197,7 @@ function loadAddress() {
 
     var data = $("#form1").serialize();
 
-    alert("Inside load address")
+   // alert("Inside load address")
 
     $.ajax({
         type: 'get',
@@ -208,7 +214,7 @@ function loadAddress() {
             }
             for (let i = 0; i < result.length; i++) {
                 var checked = "";
-                if (result[i].isDefault == true) {
+                if ( i==0) {
                     checked = "checked";
                 }
 
@@ -222,13 +228,13 @@ function loadAddress() {
 
 
 
-                checked = "";
+                
             }
-            console.log(result);
+            //console.log(result);
         },
         error: function () {
             alert('failed to receive the data');
-            console.log('failed ');
+            //console.log('failed ');
         }
     });
 }
@@ -281,7 +287,7 @@ function saveAddress() {
         },
         error: function () {
             alert('Failed to receive the Data');
-            console.log('Failed ');
+            //console.log('Failed ');
         }
     });
 }
@@ -357,13 +363,13 @@ function completeBookService() {
     data.comments = document.getElementById("comments").value;
 
     data.HasPets = document.getElementById("flexCheckDefault").checked;
-    alert(document.getElementById("flexCheckDefault").checked);
+    //alert(document.getElementById("flexCheckDefault").checked);
 
 
 
     //data.addressId = $('#addresses div input[type=radio]:checked').val();
     data.addressId = document.querySelector('input[name="address"]:checked').value;
-    alert(data.addressId);
+   // alert(data.addressId);
 
     $.ajax({
         type: 'post',
@@ -388,7 +394,7 @@ function completeBookService() {
 
         error: function () {
             alert('failed to receive the data');
-            console.log('failed ');
+            //console.log('failed ');
         }
     });
 }

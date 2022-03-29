@@ -413,3 +413,12 @@ td button {
 label {
     margin-top: 0.5rem;
 }
+
+
+
+
+
+.dataTables_info {
+    margin-top: 3%;
+    margin-left: 5px;
+}
