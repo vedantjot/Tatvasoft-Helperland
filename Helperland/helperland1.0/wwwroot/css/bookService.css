@@ -449,3 +449,59 @@ label.btn img {
 .footer-logo-image {
     max-height: 92px;
 }
+
+
+
+
+
+
+
+
+.blockCard {
+    padding: 1%;
+    margin: 1%;
+    text-align: center;
+    max-height: 241px;
+    max-width: 150px;
+}
+
+
+
+
+
+    .blockCard input[type="radio"] {
+        display: none;
+    }
+
+    .blockCard [type=radio] + label {
+        cursor: pointer;
+    }
+
+    .blockCard input[type="radio"]:checked + label {
+        border: 3px solid #0e8ab0;
+        border-radius: 50%;
+    }
+
+
+.form-check-label {
+    pointer-events: none;
+}
+
+#favouriteSProw .cap-icon {
+    width: 100px;
+    height: 100px;
+    border: solid 1px #aaa;
+    background-color: var(--white);
+    border-radius: 50%;
+    float: none;
+}
+
+.favspselectbtn {
+    border: 1px solid #0e8ab0;
+    border-radius: 17px;
+    /*background-color: #0e8ab0;*/
+    color: black;
+    font-size: 16px;
+    margin: 5px;
+    padding: 5px 15px;
+}

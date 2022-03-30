@@ -177,6 +177,7 @@ function scheduleSubmit() {
                 Clickable("form3Btn");
                 ClickFunction("form3Btn");
                 loadAddress();
+                loadFavouriteSp();
 
             }
             else {
@@ -370,6 +371,10 @@ function completeBookService() {
     //data.addressId = $('#addresses div input[type=radio]:checked').val();
     data.addressId = document.querySelector('input[name="address"]:checked').value;
    // alert(data.addressId);
+
+    if (favcheckd != null) {
+        data.serviceProviderId = favcheckd;
+    }
 
     $.ajax({
         type: 'post',
@@ -572,5 +577,129 @@ function getCityFromPostalCode(zip) {
 
 
 
+//Fab sp
 
 
+var favcheckd = null;
+
+function loadFavouriteSp() {
+
+
+    favcheckd = null;
+
+
+    $.ajax({
+        type: 'get',
+        url: '/customer/FavouriteSp',
+        contenttype: 'application/x-www-form-urlencoded; charset=utf-8',
+
+        success: function (result) {
+
+            $("#favouriteSProw").empty();
+            console.log("suceess");
+            for (var i = 0; i < result.length; i++) {
+
+
+
+
+
+
+                var html = ' <div class="col blockCard">' +
+                    '<input class="form-check-input" type="radio" name="favSP" id="avtar' + result[i].userId + '" value="' + result[i].userId + '">' +
+                    '<label class="form-check-label" for="avtar' + result[i].userId + '"><img src="/image/' + result[i].userProfilePicture + '" class="cap-icon" /></label>' +
+                    ' <p> ' + result[i].firstName + ' </p>' +
+                    ' <button type="button"   data-value="' + result[i].userId + '" class="favspselectbtn"> Select </button> ' +
+                    '</div >'
+
+
+                $("#favouriteSProw").append(html);
+
+
+
+
+
+                console.log(result[i].userId);
+            }
+
+        },
+        error: function () {
+            document.getElementById("acceptAlert").click();
+            $('#NewServiceAcceptStatus').text("failed to receive the data").css("color", "Red");
+
+
+        }
+    });
+
+}
+
+
+
+
+
+$(document).on("click", ".favspselectbtn", function () {
+    var favid = this.getAttribute("data-value")
+
+
+
+
+    $('#avtar' + favid).prop("checked", true);
+
+
+    var data = {};
+
+
+
+
+    data.serviceProviderId = favid;
+
+    var temp = document.getElementById("Date").value;
+    data.serviceStartDate = temp + " " + document.getElementById("Time").value;
+
+    var temp1 = document.getElementById("total_hours").innerHTML;
+    temp1 = parseFloat(temp1);
+    data.serviceHours = document.getElementById("Duration").value;
+    data.extraHours = temp1 - parseFloat(data.serviceHours);
+
+
+
+    console.log("line 661:- "+data.serviceProviderId);
+    $.ajax({
+        type: 'Post',
+        url: '/customer/FavouriteSpCheckConflict',
+        contenttype: 'application/x-www-form-urlencoded; charset=utf-8',
+        data: data,
+        success: function (result) {
+
+
+            if (result == "true") {
+
+
+                favcheckd = favid;
+
+
+            }
+            else {
+                document.getElementById("acceptAlert").click();
+                $('#NewServiceAcceptStatus').text(result).css("color", "Red");
+                $('#Model_SID').text("").css("color", "gray");
+                $('#avtar' + favid).prop("checked", false);
+                favcheckd = null;
+
+
+            }
+
+
+        },
+        error: function () {
+            document.getElementById("acceptAlert").click();
+            $('#NewServiceAcceptStatus').text("failed to receive the data").css("color", "Red");
+
+
+        }
+    });
+
+
+
+
+
+});

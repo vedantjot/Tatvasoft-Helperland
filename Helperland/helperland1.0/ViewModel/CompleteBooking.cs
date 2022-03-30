@@ -10,7 +10,9 @@ namespace helperland1._0.ViewModel
         public class CompleteBooking
         {
             public int AddressId { get; set; }
-            public DateTime ServiceStartDate { get; set; }
+
+           public int? ServiceProviderId { get; set; }
+          public DateTime ServiceStartDate { get; set; }
              
             public float ServiceHours { get; set; }
             public float ExtraHours { get; set; }

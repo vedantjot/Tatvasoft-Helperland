@@ -316,9 +316,9 @@ namespace helperland1._0.Controllers
             List<ServiceRequest> list = _db.ServiceRequests.Where(x => (x.ServiceProviderId == Id) && (x.Status == 2) && (x.ServiceStartDate > startDate && x.ServiceStartDate < endDate)).ToList();
 
             double mins = ((double)(request.ServiceHours + request.ExtraHours)) * 60;
-            DateTime endTimeRequest = request.ServiceStartDate.AddMinutes(mins + 60);
+           DateTime endTimeRequest = request.ServiceStartDate.AddMinutes(mins+60);
 
-            request.ServiceStartDate = request.ServiceStartDate.AddMinutes(-60);
+            var ServiceStartDate = request.ServiceStartDate.AddMinutes(-60);
             //Console.WriteLine(endTimeRequest);
             //Console.WriteLine(request.ServiceStartDate);
             foreach (ServiceRequest booked in list)
@@ -326,7 +326,7 @@ namespace helperland1._0.Controllers
                 mins = ((double)(booked.ServiceHours + booked.ExtraHours)) * 60;
                 DateTime endTimeBooked = booked.ServiceStartDate.AddMinutes(mins);
 
-                if (request.ServiceStartDate < booked.ServiceStartDate)
+                if (ServiceStartDate < booked.ServiceStartDate)
                 {
                     if (endTimeRequest <= booked.ServiceStartDate)
                     {
@@ -339,7 +339,7 @@ namespace helperland1._0.Controllers
                 }
                 else
                 {
-                    if (request.ServiceStartDate < endTimeBooked)
+                    if (ServiceStartDate < endTimeBooked)
                     {
                         return booked.ServiceRequestId;
                     }

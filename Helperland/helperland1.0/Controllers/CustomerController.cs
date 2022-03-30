@@ -231,7 +231,7 @@ namespace helperland1._0.Controllers
             double mins = ((double)(request.ServiceHours + request.ExtraHours)) * 60;
             DateTime endTimeRequest = request.ServiceStartDate.AddMinutes(mins + 60);
 
-            request.ServiceStartDate = request.ServiceStartDate.AddMinutes(-60);
+            var ServiceStartDate = request.ServiceStartDate.AddMinutes(-60);
             //Console.WriteLine(endTimeRequest);
             //Console.WriteLine(request.ServiceStartDate);
             foreach (ServiceRequest booked in list)
@@ -239,7 +239,7 @@ namespace helperland1._0.Controllers
                 mins = ((double)(booked.ServiceHours + booked.ExtraHours)) * 60;
                 DateTime endTimeBooked = booked.ServiceStartDate.AddMinutes(mins);
 
-                if (request.ServiceStartDate < booked.ServiceStartDate)
+                if (ServiceStartDate < booked.ServiceStartDate)
                 {
                     if (endTimeRequest <= booked.ServiceStartDate)
                     {
@@ -252,7 +252,7 @@ namespace helperland1._0.Controllers
                 }
                 else
                 {
-                    if (request.ServiceStartDate < endTimeBooked)
+                    if (ServiceStartDate < endTimeBooked)
                     {
                         return booked.ServiceRequestId;
                     }
@@ -696,6 +696,16 @@ namespace helperland1._0.Controllers
             add.HasIssue = false;
             add.Status = 1;
 
+            Console.WriteLine("hello"+complete.ServiceProviderId);
+
+            if (complete.ServiceProviderId != null)
+            {
+
+                add.ServiceProviderId = complete.ServiceProviderId;
+                add.Status = 2;
+
+            }
+
             var result = _db.ServiceRequests.Add(add);
             _db.SaveChanges();
 
@@ -759,7 +769,13 @@ namespace helperland1._0.Controllers
 
             if (result != null && srAddrResult != null)
             {
-                sendServiceMailtoSP(result.Entity.ServiceRequestId,result.Entity.ZipCode);
+
+                if (complete.ServiceProviderId == null)
+                {
+                    sendServiceMailtoSP(result.Entity.ServiceRequestId, result.Entity.ZipCode);
+
+                }
+                    
                 return Ok(Json(result.Entity.ServiceRequestId));
 
 
@@ -1130,6 +1146,79 @@ namespace helperland1._0.Controllers
 
 
         }
+
+
+
+        // get favourite sp for book service 
+
+        public JsonResult FavouriteSp()
+        {
+
+            int? Id = HttpContext.Session.GetInt32("userId");
+            if (Id == null)
+            {
+                Id = Convert.ToInt32(Request.Cookies["userId"]);
+            }
+
+
+            List<int> SPID = _db.FavoriteAndBlockeds.Where(x => x.UserId == Id && x.IsFavorite == true && x.IsBlocked == false).Select(u => u.TargetUserId).ToList();
+
+            var Blockedbysp = _db.FavoriteAndBlockeds.Where(x => x.TargetUserId == Id && x.IsBlocked == true).Select(u => u.UserId).ToList();
+
+
+            SPID = SPID.Except(Blockedbysp).ToList();
+
+            var SPSetId = new HashSet<int>(SPID);
+
+            List<User> favSp = new List<User>();
+
+
+
+            foreach (int temp in SPSetId)
+            {
+
+
+
+
+                User user = _db.Users.FirstOrDefault(x => x.UserId == temp);
+
+
+
+
+                favSp.Add(user);
+
+
+            }
+
+
+
+            return Json(favSp);
+
+
+        }
+
+
+        public string FavouriteSpCheckConflict(ServiceRequest request)
+        {
+            var conflict = CheckConflict(request);
+
+
+
+            if (conflict != -1)
+            {
+                ServiceRequest conflictReqObj = _db.ServiceRequests.FirstOrDefault(x => x.ServiceRequestId == conflict);
+                DateTime conflictDateStart = conflictReqObj.ServiceStartDate;
+                DateTime ConflictDateEnd = conflictDateStart.AddMinutes((double)((conflictReqObj.ServiceHours + conflictReqObj.ExtraHours) * 60));
+
+                String str = "Another service request has been assigned to the service provider on " + conflictDateStart.ToString() + " to " + ConflictDateEnd.ToString() + ". Either choose another Service Provider or Continue without favourite Service Provider.";
+                return str;
+
+            }
+            return "true";
+
+
+        }
+
 
 
 
